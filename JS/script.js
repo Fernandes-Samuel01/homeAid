@@ -1,5 +1,5 @@
-// Category and sub-service data
-const servicesData = {
+ // Category and sub-service data
+ const servicesData = {
     plumbing: [
         { name: "Leak Repairs", image: "https://media.istockphoto.com/id/1136317145/photo/plumber-fixing-sink-pipe-with-adjustable-wrench.jpg?s=1024x1024&w=is&k=20&c=Xa_HIu0pgL9rVKcVsgIyVKzkGFj0N419OnvGjP8SgaE=" },
         { name: "Blocked Drains", image: "https://www.shutterstock.com/shutterstock/photos/2554053133/display_1500/stock-photo-plumber-unclogging-blocked-shower-drain-with-hydro-jetting-at-home-bathroom-sewer-cleaning-service-2554053133.jpg" },
@@ -147,7 +147,8 @@ document.addEventListener('DOMContentLoaded', function () {
         services.forEach(service => {
             const clone = subServiceTemplate.content.cloneNode(true);
             const button = clone.querySelector('button');
-            button.textContent = service.name; // service is object now
+            button.textContent = service.name;
+            button.dataset.serviceName = service.name.toLowerCase().replace(/[-\s]/g, '');
             button.addEventListener('click', () => {
                 filterServiceCards(service.name);
             });
@@ -230,14 +231,14 @@ function updateCartDisplay() {
             const itemElement = document.createElement('div');
             itemElement.className = 'flex justify-between items-center py-2 border-b';
             itemElement.innerHTML = `
-                 <div>
-                     <h4 class="font-medium">${item.name}</h4>
-                     <p class="text-sm text-gray-500">${item.description}</p>
-                 </div>
-                 <div class="text-right">
-                     <p class="font-medium">${item.price}</p>
-                 </div>
-             `;
+         <div>
+             <h4 class="font-medium">${item.name}</h4>
+             <p class="text-sm text-gray-500">${item.description}</p>
+         </div>
+         <div class="text-right">
+             <p class="font-medium">${item.price}</p>
+         </div>
+     `;
             cartItemsContainer.appendChild(itemElement);
             total += item.price;
         });
@@ -408,5 +409,124 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.querySelectorAll('.bg-white.p-6').forEach(card => {
         observer.observe(card);
+    });
+});
+
+// Enhanced search functionality
+document.getElementById('serviceSearchForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    const searchTerm = document.getElementById('serviceSearchInput').value.trim().toLowerCase();
+
+    if (!searchTerm) return;
+
+    // Normalize search term for comparison
+    const normalizedSearch = searchTerm.replace(/[-\s]/g, '');
+
+    // First try to find matching main service category
+    const categoryTabs = document.querySelectorAll('.category-tab');
+    let foundMainService = null;
+
+    categoryTabs.forEach(tab => {
+        const tabName = tab.dataset.category.toLowerCase().replace(/[-\s]/g, '');
+        if (tabName.includes(normalizedSearch)) {
+            foundMainService = tab;
+        }
+    });
+
+    if (foundMainService) {
+        foundMainService.click();
+        document.getElementById('services-section').scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        });
+        return;
+    }
+
+    // Then try to find matching sub-service
+    const subServiceButtons = document.querySelectorAll('.sub-service-btn');
+    let foundSubService = null;
+
+    subServiceButtons.forEach(btn => {
+        const btnText = btn.textContent.toLowerCase().replace(/[-\s]/g, '');
+        if (btnText.includes(normalizedSearch)) {
+            foundSubService = btn;
+        }
+    });
+
+    if (foundSubService) {
+        // Find the parent service category
+        const parentTab = document.querySelector(`.category-tab[data-category="${foundSubService.closest('#subServices').previousElementSibling.dataset.category}"]`);
+        if (parentTab) {
+            parentTab.click();
+        }
+
+        setTimeout(() => {
+            foundSubService.scrollIntoView({
+                behavior: 'smooth',
+                block: 'center'
+            });
+
+            // Highlight the matching sub-service
+            foundSubService.classList.add('bg-indigo-100', 'border-indigo-500');
+            setTimeout(() => {
+                foundSubService.classList.remove('bg-indigo-100', 'border-indigo-500');
+            }, 2000);
+        }, 100);
+        return;
+    }
+
+    // Finally try to find matching service cards
+    const serviceCards = document.querySelectorAll('.service-card');
+    let foundCard = null;
+
+    serviceCards.forEach(card => {
+        const cardName = card.querySelector('h4').textContent.toLowerCase().replace(/[-\s]/g, '');
+        if (cardName.includes(normalizedSearch)) {
+            foundCard = card;
+        }
+    });
+
+    if (foundCard) {
+        foundCard.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center'
+        });
+
+        // Highlight the matching card
+        foundCard.classList.add('ring-2', 'ring-indigo-500');
+        setTimeout(() => {
+            foundCard.classList.remove('ring-2', 'ring-indigo-500');
+        }, 2000);
+    }
+});
+
+// Update service cards with data attributes when created
+document.addEventListener('DOMContentLoaded', function () {
+    const observer = new MutationObserver(function (mutations) {
+        mutations.forEach(function (mutation) {
+            mutation.addedNodes.forEach(function (node) {
+                if (node.nodeType === 1 && node.classList && node.classList.contains('service-card')) {
+                    const title = node.querySelector('h4');
+                    if (title) {
+                        node.dataset.serviceName = title.textContent.toLowerCase();
+                    }
+                }
+            });
+        });
+    });
+
+    // Find Services button scroll functionality
+    document.getElementById('findServicesBtn').addEventListener('click', function (e) {
+        e.preventDefault();
+        document.getElementById('services-section').scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        });
+    });
+
+
+    observer.observe(document.querySelector('.grid'), {
+        childList: true,
+        subtree: true
     });
 });
