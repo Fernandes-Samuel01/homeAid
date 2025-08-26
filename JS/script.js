@@ -1,5 +1,5 @@
- // Category and sub-service data
- const servicesData = {
+// Category and sub-service data
+const servicesData = {
     plumbing: [
         { name: "Leak Repairs", image: "https://media.istockphoto.com/id/1136317145/photo/plumber-fixing-sink-pipe-with-adjustable-wrench.jpg?s=1024x1024&w=is&k=20&c=Xa_HIu0pgL9rVKcVsgIyVKzkGFj0N419OnvGjP8SgaE=" },
         { name: "Blocked Drains", image: "https://www.shutterstock.com/shutterstock/photos/2554053133/display_1500/stock-photo-plumber-unclogging-blocked-shower-drain-with-hydro-jetting-at-home-bathroom-sewer-cleaning-service-2554053133.jpg" },
