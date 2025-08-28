@@ -86,6 +86,18 @@
         .service-card:hover img {
             transform: scale(1.05);
         }
+
+        /* .hidden {
+            display: none !important;
+        }
+
+        .flex {
+            display: flex !important;
+        }
+
+        .block {
+            display: block !important;
+        } */
     </style>
 </head>
 
@@ -134,856 +146,959 @@
                 </button>
             </div>
         </div>
+    </header>
 
-        <!-- POPUPS (now siblings, not nested) -->
-        <!-- Login/Signup Popup -->
-        <div id="loginPopup"
-            class="hidden absolute right-4 top-[10vh] w-80 bg-white rounded-lg shadow-xl z-50 border border-gray-200">
-            <div class="p-4">
-                <div class="flex justify-between items-center border-b pb-3 mb-3">
-                    <h3 class="font-bold text-lg">Welcome</h3>
-                    <button id="closeLogin" class="text-gray-500 hover:text-gray-700">
-                        <i class="fas fa-times"></i>
-                    </button>
+    <!-- Login/Signup Overlay -->
+    <div id="loginOverlay" class="hidden fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-50"></div>
+
+    <!-- Login/Signup Choice Popup -->
+    <div id="loginPopup" class="hidden fixed inset-0 flex items-center justify-center z-50">
+        <div class="relative bg-white rounded-2xl shadow-xl w-full max-w-md overflow-hidden">
+            <!-- Background Image -->
+            <div
+                class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1470&amp;q=80')] bg-cover bg-center opacity-20">
+            </div>
+            <div class="relative p-8">
+                <!-- Brand Logo -->
+                <div class="flex flex-col items-center mb-8">
+                    <div class="flex items-center space-x-2 mb-4">
+                        <i class="fas fa-rocket text-indigo-600 text-3xl"></i>
+                        <span class="text-indigo-600 font-bold text-2xl">homeAid</span>
+                    </div>
                 </div>
-                <!-- Initial Choice Buttons -->
-                <div id="loginChoice" class="space-y-4">
-                    <button id="showLoginForm"
-                        class="w-full bg-indigo-600 text-white py-2 rounded-md hover:bg-indigo-700 transition">
-                        Login
-                    </button>
+                <!-- Auth Buttons -->
+                <div class="space-y-4">
                     <button id="showSignupForm"
-                        class="w-full border border-indigo-600 text-indigo-600 py-2 rounded-md hover:bg-indigo-50 transition">
+                        class="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-3 px-4 rounded-full text-lg font-medium hover:from-indigo-700 hover:to-purple-700 transition-all shadow-md">
                         Sign Up
                     </button>
+                    <button id="showLoginForm"
+                        class="w-full border-2 border-indigo-600 text-indigo-600 py-3 px-4 rounded-full text-lg font-medium hover:bg-indigo-50 transition-all">
+                        Log In
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Form Popup (No nested signup popup inside it!) -->
+    <div id="loginFormPopup" class="hidden fixed inset-0 flex items-center justify-center z-50">
+        <div class="relative bg-white rounded-2xl shadow-xl w-full max-w-md overflow-hidden">
+            <!-- Background Image -->
+            <div
+                class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1470&amp;q=80')] bg-cover bg-center opacity-20">
+            </div>
+            <div class="relative p-8">
+                <!-- Brand Logo -->
+                <div class="flex flex-col items-center mb-8">
+                    <div class="flex items-center space-x-2 mb-6">
+                        <i class="fas fa-rocket text-indigo-600 text-3xl"></i>
+                        <span class="text-indigo-600 font-bold text-2xl">homeAid</span>
+                    </div>
                 </div>
                 <!-- Login Form -->
-                <div id="loginForm" class="hidden space-y-4">
+                <form class="space-y-4">
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                        <input type="email"
-                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                        <input type="email" id="email"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Password</label>
-                        <input type="password"
-                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                        <input type="password" id="password"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
                     </div>
-                    <button class="w-full bg-indigo-600 text-white py-2 rounded-md hover:bg-indigo-700 transition">
-                        Login
+                    <div class="text-right">
+                        <a href="#" class="text-sm text-indigo-600 hover:underline">Forgot password?</a>
+                    </div>
+                    <button type="submit"
+                        class="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-3 px-4 rounded-lg text-lg font-medium hover:from-indigo-700 hover:to-purple-700 transition-all shadow-md">
+                        Log In
                     </button>
-                    <button id="backToChoiceFromLogin" class="w-full text-indigo-600 hover:text-indigo-800 font-medium">
-                        Back
-                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- SIGNUP Popup (Sibling!) -->
+    <div id="signupFormPopup" class="hidden fixed inset-0 flex items-center justify-center z-50">
+        <div class="relative bg-white rounded-2xl shadow-xl w-full max-w-md overflow-hidden">
+            <!-- Background Image -->
+            <div
+                class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1470&amp;q=80')] bg-cover bg-center opacity-20">
+            </div>
+            <div class="relative p-8">
+                <div class="flex flex-col items-center mb-8">
+                    <div class="flex items-center space-x-2 mb-6">
+                        <i class="fas fa-rocket text-indigo-600 text-3xl"></i>
+                        <span class="text-indigo-600 font-bold text-2xl">homeAid</span>
+                    </div>
                 </div>
                 <!-- Signup Form -->
-                <div id="signupForm" class="hidden space-y-4">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
-                        <input type="text"
-                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                <form class="space-y-4">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label for="firstName" class="block text-sm font-medium text-gray-700 mb-1">First
+                                Name</label>
+                            <input type="text" id="firstName"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                        </div>
+                        <div>
+                            <label for="lastName" class="block text-sm font-medium text-gray-700 mb-1">Last Name</label>
+                            <input type="text" id="lastName"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                        </div>
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                        <input type="email"
-                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        <label for="signupEmail" class="block text-sm font-medium text-gray-700 mb-1">Email
+                            Address</label>
+                        <input type="email" id="signupEmail"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Password</label>
-                        <input type="password"
-                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+                        <div class="flex">
+                            <select
+                                class="w-24 px-2 py-2 border border-gray-300 rounded-l-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                                <option value="+1">+1</option>
+                                <option value="+44">+44</option>
+                                <option value="+91">+91</option>
+                            </select>
+                            <input type="tel" id="phone"
+                                class="flex-1 px-4 py-2 border-t border-r border-b border-gray-300 rounded-r-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                        </div>
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Confirm Password</label>
-                        <input type="password"
-                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        <label for="signupPassword"
+                            class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                        <input type="password" id="signupPassword"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
                     </div>
-                    <button class="w-full bg-indigo-600 text-white py-2 rounded-md hover:bg-indigo-700 transition">
-                        Sign Up
+                    <button type="submit"
+                        class="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-3 px-4 rounded-lg text-lg font-medium hover:from-indigo-700 hover:to-purple-700 transition-all shadow-md">
+                        Create Account
                     </button>
-                    <button id="backToChoiceFromSignup"
-                        class="w-full text-indigo-600 hover:text-indigo-800 font-medium">
-                        Back
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Cart Popup -->
+    <div id="cartOverlay" class="hidden fixed inset-0 bg-black bg-opacity-40 z-40"></div>
+    <div id="cartPopup" class="hidden fixed inset-0 flex items-center justify-center z-50">
+        <div class="bg-white rounded-xl shadow-xl w-full max-w-sm mx-4">
+            <div class="p-6 text-center">
+                <button id="closeCart" class="absolute top-6 left-6 text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-arrow-left text-xl"></i>
+                </button>
+                <div class="flex flex-col items-center justify-center space-y-4 py-8">
+                    <div class="w-20 h-20 rounded-full bg-indigo-50 flex items-center justify-center">
+                        <i class="fas fa-shopping-cart text-3xl text-indigo-600"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800">Your cart is empty</h3>
+                    <p class="text-gray-500">Let's add some services</p>
+                    <button id="exploreServicesBtn"
+                        class="mt-4 w-full max-w-xs py-3 px-6 border-2 border-indigo-600 text-indigo-600 font-medium rounded-lg hover:bg-indigo-50 transition">
+                        Explore services
                     </button>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- Cart Popup -->
-        <div id="cartOverlay" class="hidden fixed inset-0 bg-black bg-opacity-40 z-40"></div>
-        <div id="cartPopup" class="hidden fixed inset-0 flex items-center justify-center z-50">
-            <div class="bg-white rounded-xl shadow-xl w-full max-w-sm mx-4">
-                <div class="p-6 text-center">
-                    <button id="closeCart" class="absolute top-6 left-6 text-gray-500 hover:text-gray-700">
-                        <i class="fas fa-arrow-left text-xl"></i>
-                    </button>
-                    <div class="flex flex-col items-center justify-center space-y-4 py-8">
-                        <div class="w-20 h-20 rounded-full bg-indigo-50 flex items-center justify-center">
-                            <i class="fas fa-shopping-cart text-3xl text-indigo-600"></i>
-                        </div>
-                        <h3 class="text-2xl font-bold text-gray-800">Your cart is empty</h3>
-                        <p class="text-gray-500">Let's add some services</p>
-                        <button id="exploreServicesBtn" 
-                            class="mt-4 w-full max-w-xs py-3 px-6 border-2 border-indigo-600 text-indigo-600 font-medium rounded-lg hover:bg-indigo-50 transition">
-                            Explore services
+    <!-- Overlay -->
+    <div id="locationOverlay" class="hidden fixed inset-0 bg-black bg-opacity-40 z-40"></div>
+
+    <!-- Popup -->
+    <div id="locationPopup" class="hidden fixed inset-0 flex items-center justify-center z-50">
+        <div class="bg-white rounded-2xl w-full max-w-xl shadow-xl p-6 relative">
+            <button id="closeLocation"
+                class="absolute -top-4 -right-4 bg-white hover:bg-gray-50 text-gray-600 hover:text-gray-800 text-2xl w-10 h-10 rounded-full shadow-md flex items-center justify-center transition-all">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="flex items-center mb-6">
+                <i class="fas fa-arrow-left text-xl text-gray-400 mr-3"></i>
+                <input type="text" placeholder="Search for your location/society/apartment"
+                    class="flex-1 border border-gray-300 rounded-lg px-4 py-3 text-lg focus:outline-none">
+            </div>
+            <button id="useCurrentLocation"
+                class="flex items-center gap-2 text-indigo-600 hover:underline mb-6 text-base">
+                <i class="fas fa-map-marker-alt"></i> Use current location
+            </button>
+        </div>
+    </div>
+
+
+    <!-- Main Content (remaining height) -->
+    <main class="flex-grow container mx-auto px-4 py-8">
+        <!-- Landing Hero Section -->
+        <div class="bg-white rounded-xl shadow-sm p-8 mb-8">
+            <div class="flex flex-col md:flex-row gap-8 items-center">
+                <!-- Left Content -->
+                <div class="flex-1">
+                    <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+                        Find trusted home service professionals in your area
+                    </h1>
+                    <p class="text-lg text-gray-600 mb-8 max-w-lg">
+                        Book vetted, insured professionals for cleaning, repairs, maintenance, and more. Get instant
+                        quotes and schedule service at your convenience.
+                    </p>
+
+                    <div class="flex flex-wrap gap-4 mb-8">
+                        <button id="findServicesBtn"
+                            class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3 px-6 rounded-lg transition">
+                            Find Services
+                        </button>
+
+                        <button
+                            class="border border-indigo-600 text-indigo-600 hover:bg-indigo-50 font-medium py-3 px-6 rounded-lg transition">
+                            Become a Provider
                         </button>
                     </div>
+
+                    <!-- Location Search -->
+                    <div class="flex mb-8 max-w-xl">
+                        <input type="text" placeholder="Enter your location"
+                            class="flex-grow py-3 px-4 border border-gray-300 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        <button
+                            class="bg-gray-900 hover:bg-gray-800 text-white font-medium py-3 px-6 rounded-r-lg transition">
+                            Search Services
+                        </button>
+                    </div>
+
+                    <!-- Trust Badges -->
+                    <div class="flex flex-wrap gap-6">
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-user-shield text-indigo-600"></i>
+                            <span class="text-sm font-medium">Background checked</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-shield-alt text-indigo-600"></i>
+                            <span class="text-sm font-medium">Insured</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-star text-indigo-600"></i>
+                            <span class="text-sm font-medium">5-star rated</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Image -->
+                <div class="flex-1 hidden md:block">
+                    <img src="https://images.pexels.com/photos/6196239/pexels-photo-6196239.jpeg"
+                        alt="Professional cleaners at work" class="w-full h-auto rounded-lg shadow-md object-cover">
                 </div>
             </div>
         </div>
 
-        <!-- Overlay -->
-        <div id="locationOverlay" class="hidden fixed inset-0 bg-black bg-opacity-40 z-40"></div>
-
-        <!-- Popup -->
-        <div id="locationPopup" class="hidden fixed inset-0 flex items-center justify-center z-50">
-            <div class="bg-white rounded-2xl w-full max-w-xl shadow-xl p-6 relative">
-                <button id="closeLocation" class="absolute -top-4 -right-4 bg-white hover:bg-gray-50 text-gray-600 hover:text-gray-800 text-2xl w-10 h-10 rounded-full shadow-md flex items-center justify-center transition-all">
-                    <i class="fas fa-times"></i>
-                </button>
-                <div class="flex items-center mb-6">
-                    <i class="fas fa-arrow-left text-xl text-gray-400 mr-3"></i>
-                    <input type="text" placeholder="Search for your location/society/apartment"
-                        class="flex-1 border border-gray-300 rounded-lg px-4 py-3 text-lg focus:outline-none">
-                </div>
-                <button id="useCurrentLocation"
-                    class="flex items-center gap-2 text-indigo-600 hover:underline mb-6 text-base">
-                    <i class="fas fa-map-marker-alt"></i> Use current location
-                </button>
-            </div>
-        </div>
-
-
-        <!-- Main Content (remaining height) -->
-        <main class="flex-grow container mx-auto px-4 py-8">
-            <!-- Landing Hero Section -->
-            <div class="bg-white rounded-xl shadow-sm p-8 mb-8">
-                <div class="flex flex-col md:flex-row gap-8 items-center">
-                    <!-- Left Content -->
-                    <div class="flex-1">
-                        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
-                            Find trusted home service professionals in your area
-                        </h1>
-                        <p class="text-lg text-gray-600 mb-8 max-w-lg">
-                            Book vetted, insured professionals for cleaning, repairs, maintenance, and more. Get instant
-                            quotes and schedule service at your convenience.
-                        </p>
-
-                        <div class="flex flex-wrap gap-4 mb-8">
-                            <button id="findServicesBtn"
-                                class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3 px-6 rounded-lg transition">
-                                Find Services
-                            </button>
-
-                            <button
-                                class="border border-indigo-600 text-indigo-600 hover:bg-indigo-50 font-medium py-3 px-6 rounded-lg transition">
-                                Become a Provider
-                            </button>
-                        </div>
-
-                        <!-- Location Search -->
-                        <div class="flex mb-8 max-w-xl">
-                            <input type="text" placeholder="Enter your location"
-                                class="flex-grow py-3 px-4 border border-gray-300 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                            <button
-                                class="bg-gray-900 hover:bg-gray-800 text-white font-medium py-3 px-6 rounded-r-lg transition">
-                                Search Services
-                            </button>
-                        </div>
-
-                        <!-- Trust Badges -->
-                        <div class="flex flex-wrap gap-6">
-                            <div class="flex items-center gap-2">
-                                <i class="fas fa-user-shield text-indigo-600"></i>
-                                <span class="text-sm font-medium">Background checked</span>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <i class="fas fa-shield-alt text-indigo-600"></i>
-                                <span class="text-sm font-medium">Insured</span>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <i class="fas fa-star text-indigo-600"></i>
-                                <span class="text-sm font-medium">5-star rated</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Right Image -->
-                    <div class="flex-1 hidden md:block">
-                        <img src="https://images.pexels.com/photos/6196239/pexels-photo-6196239.jpeg"
-                            alt="Professional cleaners at work" class="w-full h-auto rounded-lg shadow-md object-cover">
-                    </div>
-                </div>
-            </div>
-
-            <!-- Services Navigation -->
-            <div id="services-section" class="bg-white rounded-xl shadow-sm p-6">
-                <!-- Category Icons -->
-                <div class="flex overflow-x-auto pb-2 space-x-6 hide-scrollbar">
-                    <button
-                        class="category-tab flex flex-col items-center px-4 py-2 rounded-lg hover:bg-gray-50 transition-all"
-                        data-category="plumbing">
-                        <i class="fas fa-wrench text-3xl text-[#D7CEC7] mb-2"></i>
-                        <span class="text-sm font-medium">Plumbing</span>
-                    </button>
-                    <button
-                        class="category-tab flex flex-col items-center px-4 py-2 rounded-lg hover:bg-gray-50 transition-all"
-                        data-category="electrical">
-                        <i class="fas fa-lightbulb text-3xl text-[#D7CEC7] mb-2"></i>
-                        <span class="text-sm font-medium">Electrical</span>
-                    </button>
-                    <button
-                        class="category-tab flex flex-col items-center px-4 py-2 rounded-lg hover:bg-gray-50 transition-all"
-                        data-category="cleaning">
-                        <i class="fas fa-spray-can text-3xl text-[#D7CEC7] mb-2"></i>
-                        <span class="text-sm font-medium">Cleaning</span>
-                    </button>
-                    <button
-                        class="category-tab flex flex-col items-center px-4 py-2 rounded-lg hover:bg-gray-50 transition-all"
-                        data-category="appliance">
-                        <i class="fas fa-tools text-3xl text-[#D7CEC7] mb-2"></i>
-                        <span class="text-sm font-medium">Appliance</span>
-                    </button>
-                    <button
-                        class="category-tab flex flex-col items-center px-4 py-2 rounded-lg hover:bg-gray-50 transition-all"
-                        data-category="carpentry">
-                        <i class="fas fa-hammer text-3xl text-[#D7CEC7] mb-2"></i>
-                        <span class="text-sm font-medium">Carpentry</span>
-                    </button>
-                    <button
-                        class="category-tab flex flex-col items-center px-4 py-2 rounded-lg hover:bg-gray-50 transition-all"
-                        data-category="pest">
-                        <i class="fas fa-bug text-3xl text-[#D7CEC7] mb-2"></i>
-                        <span class="text-sm font-medium">Pest</span>
-                    </button>
-                    <button
-                        class="category-tab flex flex-col items-center px-4 py-2 rounded-lg hover:bg-gray-50 transition-all"
-                        data-category="painting">
-                        <i class="fas fa-paint-roller text-3xl text-[#D7CEC7] mb-2"></i>
-                        <span class="text-sm font-medium">Painting</span>
-                    </button>
-                    <button
-                        class="category-tab flex flex-col items-center px-4 py-2 rounded-lg hover:bg-gray-50 transition-all"
-                        data-category="hvac">
-                        <i class="fas fa-fan text-3xl text-[#D7CEC7] mb-2"></i>
-                        <span class="text-sm font-medium">HVAC</span>
-                    </button>
-                    <button
-                        class="category-tab flex flex-col items-center px-4 py-2 rounded-lg hover:bg-gray-50 transition-all"
-                        data-category="lawn">
-                        <i class="fas fa-leaf text-3xl text-[#D7CEC7] mb-2"></i>
-                        <span class="text-sm font-medium">Lawn</span>
-                    </button>
-                    <button
-                        class="category-tab flex flex-col items-center px-4 py-2 rounded-lg hover:bg-gray-50 transition-all"
-                        data-category="roofing">
-                        <i class="fas fa-home text-3xl text-[#D7CEC7] mb-2"></i>
-                        <span class="text-sm font-medium">Roofing</span>
-                    </button>
-                    <button
-                        class="category-tab flex flex-col items-center px-4 py-2 rounded-lg hover:bg-gray-50 transition-all"
-                        data-category="windows">
-                        <i class="fas fa-window-maximize text-3xl text-[#D7CEC7] mb-2"></i>
-                        <span class="text-sm font-medium">Windows</span>
-                    </button>
-                    <button
-                        class="category-tab flex flex-col items-center px-4 py-2 rounded-lg hover:bg-gray-50 transition-all"
-                        data-category="security">
-                        <i class="fas fa-shield-alt text-3xl text-[#D7CEC7] mb-2"></i>
-                        <span class="text-sm font-medium">Security</span>
-                    </button>
-                    <button
-                        class="category-tab flex flex-col items-center px-4 py-2 rounded-lg hover:bg-gray-50 transition-all"
-                        data-category="sanitization">
-                        <i class="fas fa-pump-medical text-3xl text-[#D7CEC7] mb-2"></i>
-                        <span class="text-sm font-medium">Sanitization</span>
-                    </button>
-                    <button
-                        class="category-tab flex flex-col items-center px-4 py-2 rounded-lg hover:bg-gray-50 transition-all"
-                        data-category="moving">
-                        <i class="fas fa-truck-moving text-3xl text-[#D7CEC7] mb-2"></i>
-                        <span class="text-sm font-medium">Moving</span>
-                    </button>
-                    <button
-                        class="category-tab flex flex-col items-center px-4 py-2 rounded-lg hover:bg-gray-50 transition-all"
-                        data-category="junk">
-                        <i class="fas fa-trash-alt text-3xl text-[#D7CEC7] mb-2"></i>
-                        <span class="text-sm font-medium">Junk</span>
-                    </button>
-                </div>
-
-                <!-- Sub-services (initially hidden) -->
-                <div id="subServices" class="mt-6 hidden">
-                    <div class="flex flex-wrap gap-3">
-                        <!-- Sub-services will be dynamically inserted here -->
-                    </div>
-                </div>
-
-                <!-- Service Cards Grid -->
-                <div id="serviceCards" class="mt-8 hidden">
-                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Available Services</h3>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                        <!-- Service cards will be dynamically inserted here -->
-                    </div>
-                </div>
-            </div>
-
-            <!-- Hidden template for sub-service buttons -->
-            <template id="subServiceTemplate">
+        <!-- Services Navigation -->
+        <div id="services-section" class="bg-white rounded-xl shadow-sm p-6">
+            <!-- Category Icons -->
+            <div class="flex overflow-x-auto pb-2 space-x-6 hide-scrollbar">
                 <button
-                    class="sub-service-btn px-4 py-2 bg-gray-100 hover:bg-indigo-50 border border-gray-200 rounded-full text-sm font-medium transition-all"
-                    data-service-name="">
-                    <!-- Text will be inserted here -->
+                    class="category-tab flex flex-col items-center px-4 py-2 rounded-lg hover:bg-gray-50 transition-all"
+                    data-category="plumbing">
+                    <i class="fas fa-wrench text-3xl text-[#D7CEC7] mb-2"></i>
+                    <span class="text-sm font-medium">Plumbing</span>
                 </button>
-            </template>
+                <button
+                    class="category-tab flex flex-col items-center px-4 py-2 rounded-lg hover:bg-gray-50 transition-all"
+                    data-category="electrical">
+                    <i class="fas fa-lightbulb text-3xl text-[#D7CEC7] mb-2"></i>
+                    <span class="text-sm font-medium">Electrical</span>
+                </button>
+                <button
+                    class="category-tab flex flex-col items-center px-4 py-2 rounded-lg hover:bg-gray-50 transition-all"
+                    data-category="cleaning">
+                    <i class="fas fa-spray-can text-3xl text-[#D7CEC7] mb-2"></i>
+                    <span class="text-sm font-medium">Cleaning</span>
+                </button>
+                <button
+                    class="category-tab flex flex-col items-center px-4 py-2 rounded-lg hover:bg-gray-50 transition-all"
+                    data-category="appliance">
+                    <i class="fas fa-tools text-3xl text-[#D7CEC7] mb-2"></i>
+                    <span class="text-sm font-medium">Appliance</span>
+                </button>
+                <button
+                    class="category-tab flex flex-col items-center px-4 py-2 rounded-lg hover:bg-gray-50 transition-all"
+                    data-category="carpentry">
+                    <i class="fas fa-hammer text-3xl text-[#D7CEC7] mb-2"></i>
+                    <span class="text-sm font-medium">Carpentry</span>
+                </button>
+                <button
+                    class="category-tab flex flex-col items-center px-4 py-2 rounded-lg hover:bg-gray-50 transition-all"
+                    data-category="pest">
+                    <i class="fas fa-bug text-3xl text-[#D7CEC7] mb-2"></i>
+                    <span class="text-sm font-medium">Pest</span>
+                </button>
+                <button
+                    class="category-tab flex flex-col items-center px-4 py-2 rounded-lg hover:bg-gray-50 transition-all"
+                    data-category="painting">
+                    <i class="fas fa-paint-roller text-3xl text-[#D7CEC7] mb-2"></i>
+                    <span class="text-sm font-medium">Painting</span>
+                </button>
+                <button
+                    class="category-tab flex flex-col items-center px-4 py-2 rounded-lg hover:bg-gray-50 transition-all"
+                    data-category="hvac">
+                    <i class="fas fa-fan text-3xl text-[#D7CEC7] mb-2"></i>
+                    <span class="text-sm font-medium">HVAC</span>
+                </button>
+                <button
+                    class="category-tab flex flex-col items-center px-4 py-2 rounded-lg hover:bg-gray-50 transition-all"
+                    data-category="lawn">
+                    <i class="fas fa-leaf text-3xl text-[#D7CEC7] mb-2"></i>
+                    <span class="text-sm font-medium">Lawn</span>
+                </button>
+                <button
+                    class="category-tab flex flex-col items-center px-4 py-2 rounded-lg hover:bg-gray-50 transition-all"
+                    data-category="roofing">
+                    <i class="fas fa-home text-3xl text-[#D7CEC7] mb-2"></i>
+                    <span class="text-sm font-medium">Roofing</span>
+                </button>
+                <button
+                    class="category-tab flex flex-col items-center px-4 py-2 rounded-lg hover:bg-gray-50 transition-all"
+                    data-category="windows">
+                    <i class="fas fa-window-maximize text-3xl text-[#D7CEC7] mb-2"></i>
+                    <span class="text-sm font-medium">Windows</span>
+                </button>
+                <button
+                    class="category-tab flex flex-col items-center px-4 py-2 rounded-lg hover:bg-gray-50 transition-all"
+                    data-category="security">
+                    <i class="fas fa-shield-alt text-3xl text-[#D7CEC7] mb-2"></i>
+                    <span class="text-sm font-medium">Security</span>
+                </button>
+                <button
+                    class="category-tab flex flex-col items-center px-4 py-2 rounded-lg hover:bg-gray-50 transition-all"
+                    data-category="sanitization">
+                    <i class="fas fa-pump-medical text-3xl text-[#D7CEC7] mb-2"></i>
+                    <span class="text-sm font-medium">Sanitization</span>
+                </button>
+                <button
+                    class="category-tab flex flex-col items-center px-4 py-2 rounded-lg hover:bg-gray-50 transition-all"
+                    data-category="moving">
+                    <i class="fas fa-truck-moving text-3xl text-[#D7CEC7] mb-2"></i>
+                    <span class="text-sm font-medium">Moving</span>
+                </button>
+                <button
+                    class="category-tab flex flex-col items-center px-4 py-2 rounded-lg hover:bg-gray-50 transition-all"
+                    data-category="junk">
+                    <i class="fas fa-trash-alt text-3xl text-[#D7CEC7] mb-2"></i>
+                    <span class="text-sm font-medium">Junk</span>
+                </button>
+            </div>
 
-            <!-- Hidden template for service cards -->
-            <template id="serviceCardTemplate">
-                <div class="service-card bg-white rounded-xl shadow-sm overflow-hidden transition-all hover:shadow-md hover:-translate-y-1 cursor-pointer"
-                    data-service-name="">
-                    <div class="h-40 bg-gray-100 flex items-center justify-center">
-                        <img class="h-full w-full object-cover" src="" alt="Service image">
-                    </div>
-                    <div class="p-4">
-                        <h4 class="font-medium text-gray-800 text-center"></h4>
-                    </div>
-                </div>
-            </template>
-        </main>
-
-        <!-- Footer -->
-        <footer class="bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-12">
-            <div class="container mx-auto px-4">
-                <div class="flex flex-col md:flex-row justify-between">
-                    <!-- Logo -->
-                    <div class="mb-8 md:mb-0">
-                        <div class="flex items-center space-x-2">
-                            <i class="fas fa-rocket text-white text-2xl"></i>
-                            <span class="text-white font-bold text-xl">homeAid</span>
-                        </div>
-                    </div>
-
-                    <!-- Footer Columns -->
-                    <div
-                        class="flex flex-col sm:flex-row justify-center items-center sm:items-start gap-8 md:gap-16 w-full">
-                        <!-- Company Links -->
-                        <div>
-                            <h3 class="text-white font-semibold mb-4">Company</h3>
-                            <ul class="space-y-2">
-                                <li><a href="#" class="hover:text-indigo-600 transition">About Us</a></li>
-                                <li><a href="#" class="hover:text-indigo-600 transition">Contact Us</a></li>
-                                <li><a href="#" class="hover:text-indigo-600 transition">Careers</a></li>
-                            </ul>
-                        </div>
-
-                        <!-- Customer Links -->
-                        <div>
-                            <h3 class="text-white font-semibold mb-4">For customers</h3>
-                            <ul class="space-y-2">
-                                <li><a href="#" class="hover:text-indigo-600 transition">HomeAid Reviews</a></li>
-                                <li><a href="#" class="hover:text-indigo-600 transition">Categories Near You</a></li>
-                            </ul>
-                        </div>
-
-                        <!-- For Professionals Links -->
-                        <div>
-                            <h3 class="text-white font-semibold mb-4">For professionals</h3>
-                            <ul class="space-y-2">
-                                <li><a href="#" class="hover:text-indigo-600 transition">Register as a Professional</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Copyright -->
-                <div class="border-t border-indigo-500 mt-8 pt-8 text-center text-sm">
-                    <p>© Copyright 2025 HomeAid Ltd. All rights reserved.</p>
+            <!-- Sub-services (initially hidden) -->
+            <div id="subServices" class="mt-6 hidden">
+                <div class="flex flex-wrap gap-3">
+                    <!-- Sub-services will be dynamically inserted here -->
                 </div>
             </div>
-        </footer>
-        <script>
-            // Category and sub-service data
-            const servicesData = {
-                plumbing: [
-                    { name: "Leak Repairs", image: "https://media.istockphoto.com/id/1136317145/photo/plumber-fixing-sink-pipe-with-adjustable-wrench.jpg?s=1024x1024&w=is&k=20&c=Xa_HIu0pgL9rVKcVsgIyVKzkGFj0N419OnvGjP8SgaE=" },
-                    { name: "Blocked Drains", image: "https://www.shutterstock.com/shutterstock/photos/2554053133/display_1500/stock-photo-plumber-unclogging-blocked-shower-drain-with-hydro-jetting-at-home-bathroom-sewer-cleaning-service-2554053133.jpg" },
-                    { name: "Pipe Fitting", image: "https://www.shutterstock.com/image-photo/plumber-man-fix-repair-service-260nw-2304152981.jpg" },
-                    { name: "Faucet Installation", image: "https://images.pexels.com/photos/6195120/pexels-photo-6195120.jpeg" },
-                    { name: "Water Heater Repair", image: "https://www.shutterstock.com/shutterstock/photos/1829425892/display_1500/stock-photo-a-man-repairing-a-boiler-in-a-medical-mask-1829425892.jpg" }
-                ],
-                electrical: [
-                    { name: "Wiring", image: "https://images.pexels.com/photos/1435187/pexels-photo-1435187.jpeg" },
-                    { name: "Outlet Repair", image: "https://images.pexels.com/photos/1435186/pexels-photo-1435186.jpeg" },
-                    { name: "Light Installation", image: "https://images.pexels.com/photos/1435188/pexels-photo-1435188.jpeg" },
-                    { name: "Circuit Breaker", image: "https://images.pexels.com/photos/1435214/pexels-photo-1435214.jpeg" },
-                    { name: "Generator Setup", image: "https://images.pexels.com/photos/4254163/pexels-photo-4254163.jpeg" }
-                ],
-                cleaning: [
-                    { name: "Deep Cleaning", image: "https://images.pexels.com/photos/4239039/pexels-photo-4239039.jpeg" },
-                    { name: "Carpet Cleaning", image: "https://images.pexels.com/photos/38325/vacuum-cleaner-carpet-cleaner-housework-housekeeping-38325.jpeg" },
-                    { name: "Window Cleaning", image: "https://images.pexels.com/photos/1339191/pexels-photo-1339191.jpeg" },
-                    { name: "Post-Construction", image: "https://images.pexels.com/photos/3616736/pexels-photo-3616736.jpeg" },
-                    { name: "Office Cleaning", image: "https://images.pexels.com/photos/2092717/pexels-photo-2092717.jpeg" }
-                ],
-                appliance: [
-                    { name: "Refrigerator", image: "https://images.pexels.com/photos/3735208/pexels-photo-3735208.jpeg" },
-                    { name: "Washing Machine", image: "https://images.pexels.com/photos/3963086/pexels-photo-3963086.jpeg" },
-                    { name: "Oven", image: "https://images.pexels.com/photos/5591663/pexels-photo-5591663.jpeg" },
-                    { name: "Dishwasher", image: "https://images.pexels.com/photos/6195029/pexels-photo-6195029.jpeg" },
-                    { name: "Microwave", image: "https://images.pexels.com/photos/2083546/pexels-photo-2083546.jpeg" }
-                ],
-                carpentry: [
-                    { name: "Furniture Repair", image: "https://images.pexels.com/photos/1571177/pexels-photo-1571177.jpeg" },
-                    { name: "Shelving", image: "https://images.pexels.com/photos/415314/pexels-photo-415314.jpeg" },
-                    { name: "Door Installation", image: "https://images.pexels.com/photos/1769243/pexels-photo-1769243.jpeg" },
-                    { name: "Deck Building", image: "https://images.pexels.com/photos/280222/pexels-photo-280222.jpeg" },
-                    { name: "Trim Work", image: "https://images.pexels.com/photos/2252400/pexels-photo-2252400.jpeg" }
-                ],
-                pest: [
-                    { name: "Ant Control", image: "https://images.pexels.com/photos/4021423/pexels-photo-4021423.jpeg" },
-                    { name: "Termite", image: "https://cdn.pixabay.com/photo/2017/07/24/22/19/insect-2532847_1280.jpg" },
-                    { name: "Rodent", image: "https://cdn.pixabay.com/photo/2016/03/31/19/14/mouse-1294013_1280.jpg" },
-                    { name: "Mosquito", image: "https://cdn.pixabay.com/photo/2017/07/31/14/39/mosquito-2557306_1280.jpg" },
-                    { name: "Bed Bugs", image: "https://cdn.pixabay.com/photo/2016/07/20/19/50/bed-bug-1535988_1280.jpg" }
-                ],
-                painting: [
-                    { name: "Interior", image: "https://images.pexels.com/photos/1573827/pexels-photo-1573827.jpeg" },
-                    { name: "Exterior", image: "https://images.pexels.com/photos/2106209/pexels-photo-2106209.jpeg" },
-                    { name: "Wallpaper", image: "https://images.pexels.com/photos/1457847/pexels-photo-1457847.jpeg" },
-                    { name: "Cabinet", image: "https://images.pexels.com/photos/2082090/pexels-photo-2082090.jpeg" },
-                    { name: "Texture", image: "https://images.pexels.com/photos/4622357/pexels-photo-4622357.jpeg" }
-                ],
-                hvac: [
-                    { name: "AC Repair", image: "https://images.pexels.com/photos/3768917/pexels-photo-3768917.jpeg" },
-                    { name: "Heating", image: "https://images.pexels.com/photos/3768916/pexels-photo-3768916.jpeg" },
-                    { name: "Ventilation", image: "https://images.pexels.com/photos/4792482/pexels-photo-4792482.jpeg" },
-                    { name: "Duct Cleaning", image: "https://images.pexels.com/photos/1615870/pexels-photo-1615870.jpeg" },
-                    { name: "Thermostat", image: "https://images.pexels.com/photos/1048808/pexels-photo-1048808.jpeg" }
-                ],
-                lawn: [
-                    { name: "Mowing", image: "https://images.pexels.com/photos/58921/pexels-photo-58921.jpeg" },
-                    { name: "Landscaping", image: "https://images.pexels.com/photos/1029647/pexels-photo-1029647.jpeg" },
-                    { name: "Tree Trimming", image: "https://images.pexels.com/photos/3609896/pexels-photo-3609896.jpeg" },
-                    { name: "Fertilization", image: "https://cdn.pixabay.com/photo/2016/02/19/10/54/fertilizer-1207758_1280.jpg" },
-                    { name: "Sprinklers", image: "https://images.pexels.com/photos/2962305/pexels-photo-2962305.jpeg" }
-                ],
-                roofing: [
-                    { name: "Shingle Repair", image: "https://images.pexels.com/photos/209271/pexels-photo-209271.jpeg" },
-                    { name: "Leak Repair", image: "https://images.pexels.com/photos/68415/pexels-photo-68415.jpeg" },
-                    { name: "Gutter Cleaning", image: "https://images.pexels.com/photos/3528424/pexels-photo-3528424.jpeg" },
-                    { name: "Skylight", image: "https://images.pexels.com/photos/280222/pexels-photo-280222.jpeg" },
-                    { name: "Flat Roof", image: "https://images.pexels.com/photos/3641338/pexels-photo-3641338.jpeg" }
-                ],
-                windows: [
-                    { name: "Glass Repair", image: "https://images.pexels.com/photos/3699921/pexels-photo-3699921.jpeg" },
-                    { name: "Installation", image: "https://images.pexels.com/photos/425213/pexels-photo-425213.jpeg" },
-                    { name: "Screen Repair", image: "https://images.pexels.com/photos/1339191/pexels-photo-1339191.jpeg" },
-                    { name: "Sealing", image: "https://images.pexels.com/photos/618773/pexels-photo-618773.jpeg" },
-                    { name: "Blinds", image: "https://images.pexels.com/photos/534187/pexels-photo-534187.jpeg" }
-                ],
-                security: [
-                    { name: "Camera Install", image: "https://images.pexels.com/photos/508256/pexels-photo-508256.jpeg" },
-                    { name: "Alarm System", image: "https://images.pexels.com/photos/1828876/pexels-photo-1828876.jpeg" },
-                    { name: "Smart Locks", image: "https://images.pexels.com/photos/1562205/pexels-photo-1562205.jpeg" },
-                    { name: "Motion Sensors", image: "https://images.pexels.com/photos/235654/pexels-photo-235654.jpeg" },
-                    { name: "Intercom", image: "https://images.pexels.com/photos/836951/pexels-photo-836951.jpeg" }
-                ],
-                sanitization: [
-                    { name: "Disinfection", image: "https://images.pexels.com/photos/4099462/pexels-photo-4099462.jpeg" },
-                    { name: "Mold Removal", image: "https://images.pexels.com/photos/4682324/pexels-photo-4682324.jpeg" },
-                    { name: "Odor Removal", image: "https://images.pexels.com/photos/5162786/pexels-photo-5162786.jpeg" },
-                    { name: "UV Treatment", image: "https://images.pexels.com/photos/410058/pexels-photo-410058.jpeg" },
-                    { name: "Air Purification", image: "https://images.pexels.com/photos/3768913/pexels-photo-3768913.jpeg" }
-                ],
-                moving: [
-                    { name: "Local Moving", image: "https://images.pexels.com/photos/7464647/pexels-photo-7464647.jpeg" },
-                    { name: "Packing", image: "https://images.pexels.com/photos/424049/pexels-photo-424049.jpeg" },
-                    { name: "Furniture Assembly", image: "https://images.pexels.com/photos/1669794/pexels-photo-1669794.jpeg" },
-                    { name: "Storage", image: "https://images.pexels.com/photos/448132/pexels-photo-448132.jpeg" },
-                    { name: "Long Distance", image: "https://images.pexels.com/photos/7464647/pexels-photo-7464647.jpeg" }
-                ],
-                junk: [
-                    { name: "Furniture Removal", image: "https://images.pexels.com/photos/87678/pexels-photo-87678.jpeg" },
-                    { name: "Yard Waste", image: "https://images.pexels.com/photos/533157/pexels-photo-533157.jpeg" },
-                    { name: "Electronics", image: "https://images.pexels.com/photos/159220/pexels-photo-159220.jpeg" },
-                    { name: "Construction Debris", image: "https://images.pexels.com/photos/209347/pexels-photo-209347.jpeg" },
-                    { name: "Appliance", image: "https://images.pexels.com/photos/717800/pexels-photo-717800.jpeg" }
-                ]
-            };
+
+            <!-- Service Cards Grid -->
+            <div id="serviceCards" class="mt-8 hidden">
+                <h3 class="text-xl font-semibold text-gray-800 mb-4">Available Services</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    <!-- Service cards will be dynamically inserted here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Hidden template for sub-service buttons -->
+        <template id="subServiceTemplate">
+            <button
+                class="sub-service-btn px-4 py-2 bg-gray-100 hover:bg-indigo-50 border border-gray-200 rounded-full text-sm font-medium transition-all"
+                data-service-name="">
+                <!-- Text will be inserted here -->
+            </button>
+        </template>
+
+        <!-- Hidden template for service cards -->
+        <template id="serviceCardTemplate">
+            <div class="service-card bg-white rounded-xl shadow-sm overflow-hidden transition-all hover:shadow-md hover:-translate-y-1 cursor-pointer"
+                data-service-name="">
+                <div class="h-40 bg-gray-100 flex items-center justify-center">
+                    <img class="h-full w-full object-cover" src="" alt="Service image">
+                </div>
+                <div class="p-4">
+                    <h4 class="font-medium text-gray-800 text-center"></h4>
+                </div>
+            </div>
+        </template>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between">
+                <!-- Logo -->
+                <div class="mb-8 md:mb-0">
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-rocket text-white text-2xl"></i>
+                        <span class="text-white font-bold text-xl">homeAid</span>
+                    </div>
+                </div>
+
+                <!-- Footer Columns -->
+                <div
+                    class="flex flex-col sm:flex-row justify-center items-center sm:items-start gap-8 md:gap-16 w-full">
+                    <!-- Company Links -->
+                    <div>
+                        <h3 class="text-white font-semibold mb-4">Company</h3>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="hover:text-indigo-600 transition">About Us</a></li>
+                            <li><a href="#" class="hover:text-indigo-600 transition">Contact Us</a></li>
+                            <li><a href="#" class="hover:text-indigo-600 transition">Careers</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Customer Links -->
+                    <div>
+                        <h3 class="text-white font-semibold mb-4">For customers</h3>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="hover:text-indigo-600 transition">HomeAid Reviews</a></li>
+                            <li><a href="#" class="hover:text-indigo-600 transition">Categories Near You</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- For Professionals Links -->
+                    <div>
+                        <h3 class="text-white font-semibold mb-4">For professionals</h3>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="hover:text-indigo-600 transition">Register as a Professional</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div class="border-t border-indigo-500 mt-8 pt-8 text-center text-sm">
+                <p>© Copyright 2025 HomeAid Ltd. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script>
+        // Category and sub-service data
+        const servicesData = {
+            plumbing: [
+                { name: "Leak Repairs", image: "https://media.istockphoto.com/id/1136317145/photo/plumber-fixing-sink-pipe-with-adjustable-wrench.jpg?s=1024x1024&w=is&k=20&c=Xa_HIu0pgL9rVKcVsgIyVKzkGFj0N419OnvGjP8SgaE=" },
+                { name: "Blocked Drains", image: "https://www.shutterstock.com/shutterstock/photos/2554053133/display_1500/stock-photo-plumber-unclogging-blocked-shower-drain-with-hydro-jetting-at-home-bathroom-sewer-cleaning-service-2554053133.jpg" },
+                { name: "Pipe Fitting", image: "https://www.shutterstock.com/image-photo/plumber-man-fix-repair-service-260nw-2304152981.jpg" },
+                { name: "Faucet Installation", image: "https://images.pexels.com/photos/6195120/pexels-photo-6195120.jpeg" },
+                { name: "Water Heater Repair", image: "https://www.shutterstock.com/shutterstock/photos/1829425892/display_1500/stock-photo-a-man-repairing-a-boiler-in-a-medical-mask-1829425892.jpg" }
+            ],
+            electrical: [
+                { name: "Wiring", image: "https://images.pexels.com/photos/1435187/pexels-photo-1435187.jpeg" },
+                { name: "Outlet Repair", image: "https://images.pexels.com/photos/1435186/pexels-photo-1435186.jpeg" },
+                { name: "Light Installation", image: "https://images.pexels.com/photos/1435188/pexels-photo-1435188.jpeg" },
+                { name: "Circuit Breaker", image: "https://images.pexels.com/photos/1435214/pexels-photo-1435214.jpeg" },
+                { name: "Generator Setup", image: "https://images.pexels.com/photos/4254163/pexels-photo-4254163.jpeg" }
+            ],
+            cleaning: [
+                { name: "Deep Cleaning", image: "https://images.pexels.com/photos/4239039/pexels-photo-4239039.jpeg" },
+                { name: "Carpet Cleaning", image: "https://images.pexels.com/photos/38325/vacuum-cleaner-carpet-cleaner-housework-housekeeping-38325.jpeg" },
+                { name: "Window Cleaning", image: "https://images.pexels.com/photos/1339191/pexels-photo-1339191.jpeg" },
+                { name: "Post-Construction", image: "https://images.pexels.com/photos/3616736/pexels-photo-3616736.jpeg" },
+                { name: "Office Cleaning", image: "https://images.pexels.com/photos/2092717/pexels-photo-2092717.jpeg" }
+            ],
+            appliance: [
+                { name: "Refrigerator", image: "https://images.pexels.com/photos/3735208/pexels-photo-3735208.jpeg" },
+                { name: "Washing Machine", image: "https://images.pexels.com/photos/3963086/pexels-photo-3963086.jpeg" },
+                { name: "Oven", image: "https://images.pexels.com/photos/5591663/pexels-photo-5591663.jpeg" },
+                { name: "Dishwasher", image: "https://images.pexels.com/photos/6195029/pexels-photo-6195029.jpeg" },
+                { name: "Microwave", image: "https://images.pexels.com/photos/2083546/pexels-photo-2083546.jpeg" }
+            ],
+            carpentry: [
+                { name: "Furniture Repair", image: "https://images.pexels.com/photos/1571177/pexels-photo-1571177.jpeg" },
+                { name: "Shelving", image: "https://images.pexels.com/photos/415314/pexels-photo-415314.jpeg" },
+                { name: "Door Installation", image: "https://images.pexels.com/photos/1769243/pexels-photo-1769243.jpeg" },
+                { name: "Deck Building", image: "https://images.pexels.com/photos/280222/pexels-photo-280222.jpeg" },
+                { name: "Trim Work", image: "https://images.pexels.com/photos/2252400/pexels-photo-2252400.jpeg" }
+            ],
+            pest: [
+                { name: "Ant Control", image: "https://images.pexels.com/photos/4021423/pexels-photo-4021423.jpeg" },
+                { name: "Termite", image: "https://cdn.pixabay.com/photo/2017/07/24/22/19/insect-2532847_1280.jpg" },
+                { name: "Rodent", image: "https://cdn.pixabay.com/photo/2016/03/31/19/14/mouse-1294013_1280.jpg" },
+                { name: "Mosquito", image: "https://cdn.pixabay.com/photo/2017/07/31/14/39/mosquito-2557306_1280.jpg" },
+                { name: "Bed Bugs", image: "https://cdn.pixabay.com/photo/2016/07/20/19/50/bed-bug-1535988_1280.jpg" }
+            ],
+            painting: [
+                { name: "Interior", image: "https://images.pexels.com/photos/1573827/pexels-photo-1573827.jpeg" },
+                { name: "Exterior", image: "https://images.pexels.com/photos/2106209/pexels-photo-2106209.jpeg" },
+                { name: "Wallpaper", image: "https://images.pexels.com/photos/1457847/pexels-photo-1457847.jpeg" },
+                { name: "Cabinet", image: "https://images.pexels.com/photos/2082090/pexels-photo-2082090.jpeg" },
+                { name: "Texture", image: "https://images.pexels.com/photos/4622357/pexels-photo-4622357.jpeg" }
+            ],
+            hvac: [
+                { name: "AC Repair", image: "https://images.pexels.com/photos/3768917/pexels-photo-3768917.jpeg" },
+                { name: "Heating", image: "https://images.pexels.com/photos/3768916/pexels-photo-3768916.jpeg" },
+                { name: "Ventilation", image: "https://images.pexels.com/photos/4792482/pexels-photo-4792482.jpeg" },
+                { name: "Duct Cleaning", image: "https://images.pexels.com/photos/1615870/pexels-photo-1615870.jpeg" },
+                { name: "Thermostat", image: "https://images.pexels.com/photos/1048808/pexels-photo-1048808.jpeg" }
+            ],
+            lawn: [
+                { name: "Mowing", image: "https://images.pexels.com/photos/58921/pexels-photo-58921.jpeg" },
+                { name: "Landscaping", image: "https://images.pexels.com/photos/1029647/pexels-photo-1029647.jpeg" },
+                { name: "Tree Trimming", image: "https://images.pexels.com/photos/3609896/pexels-photo-3609896.jpeg" },
+                { name: "Fertilization", image: "https://cdn.pixabay.com/photo/2016/02/19/10/54/fertilizer-1207758_1280.jpg" },
+                { name: "Sprinklers", image: "https://images.pexels.com/photos/2962305/pexels-photo-2962305.jpeg" }
+            ],
+            roofing: [
+                { name: "Shingle Repair", image: "https://images.pexels.com/photos/209271/pexels-photo-209271.jpeg" },
+                { name: "Leak Repair", image: "https://images.pexels.com/photos/68415/pexels-photo-68415.jpeg" },
+                { name: "Gutter Cleaning", image: "https://images.pexels.com/photos/3528424/pexels-photo-3528424.jpeg" },
+                { name: "Skylight", image: "https://images.pexels.com/photos/280222/pexels-photo-280222.jpeg" },
+                { name: "Flat Roof", image: "https://images.pexels.com/photos/3641338/pexels-photo-3641338.jpeg" }
+            ],
+            windows: [
+                { name: "Glass Repair", image: "https://images.pexels.com/photos/3699921/pexels-photo-3699921.jpeg" },
+                { name: "Installation", image: "https://images.pexels.com/photos/425213/pexels-photo-425213.jpeg" },
+                { name: "Screen Repair", image: "https://images.pexels.com/photos/1339191/pexels-photo-1339191.jpeg" },
+                { name: "Sealing", image: "https://images.pexels.com/photos/618773/pexels-photo-618773.jpeg" },
+                { name: "Blinds", image: "https://images.pexels.com/photos/534187/pexels-photo-534187.jpeg" }
+            ],
+            security: [
+                { name: "Camera Install", image: "https://images.pexels.com/photos/508256/pexels-photo-508256.jpeg" },
+                { name: "Alarm System", image: "https://images.pexels.com/photos/1828876/pexels-photo-1828876.jpeg" },
+                { name: "Smart Locks", image: "https://images.pexels.com/photos/1562205/pexels-photo-1562205.jpeg" },
+                { name: "Motion Sensors", image: "https://images.pexels.com/photos/235654/pexels-photo-235654.jpeg" },
+                { name: "Intercom", image: "https://images.pexels.com/photos/836951/pexels-photo-836951.jpeg" }
+            ],
+            sanitization: [
+                { name: "Disinfection", image: "https://images.pexels.com/photos/4099462/pexels-photo-4099462.jpeg" },
+                { name: "Mold Removal", image: "https://images.pexels.com/photos/4682324/pexels-photo-4682324.jpeg" },
+                { name: "Odor Removal", image: "https://images.pexels.com/photos/5162786/pexels-photo-5162786.jpeg" },
+                { name: "UV Treatment", image: "https://images.pexels.com/photos/410058/pexels-photo-410058.jpeg" },
+                { name: "Air Purification", image: "https://images.pexels.com/photos/3768913/pexels-photo-3768913.jpeg" }
+            ],
+            moving: [
+                { name: "Local Moving", image: "https://images.pexels.com/photos/7464647/pexels-photo-7464647.jpeg" },
+                { name: "Packing", image: "https://images.pexels.com/photos/424049/pexels-photo-424049.jpeg" },
+                { name: "Furniture Assembly", image: "https://images.pexels.com/photos/1669794/pexels-photo-1669794.jpeg" },
+                { name: "Storage", image: "https://images.pexels.com/photos/448132/pexels-photo-448132.jpeg" },
+                { name: "Long Distance", image: "https://images.pexels.com/photos/7464647/pexels-photo-7464647.jpeg" }
+            ],
+            junk: [
+                { name: "Furniture Removal", image: "https://images.pexels.com/photos/87678/pexels-photo-87678.jpeg" },
+                { name: "Yard Waste", image: "https://images.pexels.com/photos/533157/pexels-photo-533157.jpeg" },
+                { name: "Electronics", image: "https://images.pexels.com/photos/159220/pexels-photo-159220.jpeg" },
+                { name: "Construction Debris", image: "https://images.pexels.com/photos/209347/pexels-photo-209347.jpeg" },
+                { name: "Appliance", image: "https://images.pexels.com/photos/717800/pexels-photo-717800.jpeg" }
+            ]
+        };
 
 
-            document.addEventListener('DOMContentLoaded', function () {
-                const categoryTabs = document.querySelectorAll('.category-tab');
-                const subServicesContainer = document.getElementById('subServices');
-                const subServicesList = subServicesContainer.querySelector('.flex');
-                const serviceCardsContainer = document.getElementById('serviceCards');
-                const serviceCardsGrid = serviceCardsContainer.querySelector('.grid');
-                const subServiceTemplate = document.getElementById('subServiceTemplate');
-                const serviceCardTemplate = document.getElementById('serviceCardTemplate');
+        document.addEventListener('DOMContentLoaded', function () {
+            const categoryTabs = document.querySelectorAll('.category-tab');
+            const subServicesContainer = document.getElementById('subServices');
+            const subServicesList = subServicesContainer.querySelector('.flex');
+            const serviceCardsContainer = document.getElementById('serviceCards');
+            const serviceCardsGrid = serviceCardsContainer.querySelector('.grid');
+            const subServiceTemplate = document.getElementById('subServiceTemplate');
+            const serviceCardTemplate = document.getElementById('serviceCardTemplate');
 
-                // Set first tab as active by default
-                if (categoryTabs.length > 0) {
-                    categoryTabs[0].classList.add('active');
-                    showSubServices(categoryTabs[0].dataset.category);
-                    showServiceCards(categoryTabs[0].dataset.category);
-                }
-
-                categoryTabs.forEach(tab => {
-                    tab.addEventListener('click', function () {
-                        // Remove active class from all tabs
-                        categoryTabs.forEach(t => t.classList.remove('active'));
-                        // Add active class to clicked tab
-                        this.classList.add('active');
-                        // Show relevant sub-services and cards
-                        showSubServices(this.dataset.category);
-                        showServiceCards(this.dataset.category);
-                    });
-                });
-
-                function showSubServices(category) {
-                    // Clear existing sub-services
-                    subServicesList.innerHTML = '';
-
-                    // Get services for selected category
-                    const services = servicesData[category] || [];
-
-                    // Create buttons for each sub-service
-                    services.forEach(service => {
-                        const clone = subServiceTemplate.content.cloneNode(true);
-                        const button = clone.querySelector('button');
-                        button.textContent = service.name;
-                        button.dataset.serviceName = service.name.toLowerCase().replace(/[-\s]/g, '');
-                        button.addEventListener('click', () => {
-                            filterServiceCards(service.name);
-                        });
-
-                        subServicesList.appendChild(clone);
-                    });
-
-                    // Show the container
-                    subServicesContainer.classList.remove('hidden');
-                }
-
-                function showServiceCards(category) {
-                    // Clear existing cards
-                    serviceCardsGrid.innerHTML = '';
-
-                    // Get services for selected category
-                    const services = servicesData[category] || [];
-
-                    // Create cards for each service
-                    services.forEach(service => {
-                        const clone = serviceCardTemplate.content.cloneNode(true);
-                        const card = clone.querySelector('.service-card');
-                        const img = clone.querySelector('img');
-                        const title = clone.querySelector('h4');
-
-                        // Set service-specific image and title
-                        // New: use image URL from service object
-                        img.src = service.image;
-                        img.alt = `${service.name} service`;
-                        title.textContent = service.name;
-
-
-                        serviceCardsGrid.appendChild(clone);
-                    });
-
-                    // Show the container
-                    serviceCardsContainer.classList.remove('hidden');
-                }
-
-                function filterServiceCards(serviceName) {
-                    const cards = serviceCardsGrid.querySelectorAll('.service-card');
-                    cards.forEach(card => {
-                        const title = card.querySelector('h4').textContent;
-                        if (title === serviceName) {
-                            card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                            card.classList.add('ring-2', 'ring-indigo-500');
-                            setTimeout(() => {
-                                card.classList.remove('ring-2', 'ring-indigo-500');
-                            }, 2000);
-                        }
-                    });
-                }
-            });
-            // Cart functionality
-            const cartButton = document.getElementById('cartButton');
-            const cartPopup = document.getElementById('cartPopup');
-            const cartOverlay = document.getElementById('cartOverlay');
-            const closeCart = document.getElementById('closeCart');
-            const exploreServicesBtn = document.getElementById('exploreServicesBtn');
-            const cartCount = document.getElementById('cartCount');
-
-            cartButton.addEventListener('click', function() {
-                cartPopup.classList.remove('hidden');
-                cartOverlay.classList.remove('hidden');
-                document.body.style.overflow = 'hidden';
-            });
-
-            function closeCartPopup() {
-                cartPopup.classList.add('hidden');
-                cartOverlay.classList.add('hidden');
-                document.body.style.overflow = '';
+            // Set first tab as active by default
+            if (categoryTabs.length > 0) {
+                categoryTabs[0].classList.add('active');
+                showSubServices(categoryTabs[0].dataset.category);
+                showServiceCards(categoryTabs[0].dataset.category);
             }
 
-            closeCart.addEventListener('click', closeCartPopup);
-            cartOverlay.addEventListener('click', closeCartPopup);
+            categoryTabs.forEach(tab => {
+                tab.addEventListener('click', function () {
+                    // Remove active class from all tabs
+                    categoryTabs.forEach(t => t.classList.remove('active'));
+                    // Add active class to clicked tab
+                    this.classList.add('active');
+                    // Show relevant sub-services and cards
+                    showSubServices(this.dataset.category);
+                    showServiceCards(this.dataset.category);
+                });
+            });
 
-            exploreServicesBtn.addEventListener('click', function() {
-                closeCartPopup();
+            function showSubServices(category) {
+                // Clear existing sub-services
+                subServicesList.innerHTML = '';
+
+                // Get services for selected category
+                const services = servicesData[category] || [];
+
+                // Create buttons for each sub-service
+                services.forEach(service => {
+                    const clone = subServiceTemplate.content.cloneNode(true);
+                    const button = clone.querySelector('button');
+                    button.textContent = service.name;
+                    button.dataset.serviceName = service.name.toLowerCase().replace(/[-\s]/g, '');
+                    button.addEventListener('click', () => {
+                        filterServiceCards(service.name);
+                    });
+
+                    subServicesList.appendChild(clone);
+                });
+
+                // Show the container
+                subServicesContainer.classList.remove('hidden');
+            }
+
+            function showServiceCards(category) {
+                // Clear existing cards
+                serviceCardsGrid.innerHTML = '';
+
+                // Get services for selected category
+                const services = servicesData[category] || [];
+
+                // Create cards for each service
+                services.forEach(service => {
+                    const clone = serviceCardTemplate.content.cloneNode(true);
+                    const card = clone.querySelector('.service-card');
+                    const img = clone.querySelector('img');
+                    const title = clone.querySelector('h4');
+
+                    // Set service-specific image and title
+                    // New: use image URL from service object
+                    img.src = service.image;
+                    img.alt = `${service.name} service`;
+                    title.textContent = service.name;
+
+
+                    serviceCardsGrid.appendChild(clone);
+                });
+
+                // Show the container
+                serviceCardsContainer.classList.remove('hidden');
+            }
+
+            function filterServiceCards(serviceName) {
+                const cards = serviceCardsGrid.querySelectorAll('.service-card');
+                cards.forEach(card => {
+                    const title = card.querySelector('h4').textContent;
+                    if (title === serviceName) {
+                        card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                        card.classList.add('ring-2', 'ring-indigo-500');
+                        setTimeout(() => {
+                            card.classList.remove('ring-2', 'ring-indigo-500');
+                        }, 2000);
+                    }
+                });
+            }
+        });
+        // Cart functionality
+        const cartButton = document.getElementById('cartButton');
+        const cartPopup = document.getElementById('cartPopup');
+        const cartOverlay = document.getElementById('cartOverlay');
+        const closeCart = document.getElementById('closeCart');
+        const exploreServicesBtn = document.getElementById('exploreServicesBtn');
+        const cartCount = document.getElementById('cartCount');
+
+        cartButton.addEventListener('click', function () {
+            cartPopup.classList.remove('hidden');
+            cartOverlay.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        });
+
+        function closeCartPopup() {
+            cartPopup.classList.add('hidden');
+            cartOverlay.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        closeCart.addEventListener('click', closeCartPopup);
+        cartOverlay.addEventListener('click', closeCartPopup);
+
+        exploreServicesBtn.addEventListener('click', function () {
+            closeCartPopup();
+            document.getElementById('services-section').scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        });
+
+        // Location popup logic
+        const locationButton = document.getElementById('locationButton');
+        const locationPopup = document.getElementById('locationPopup');
+        const locationOverlay = document.getElementById('locationOverlay');
+        const closeLocation = document.getElementById('closeLocation');
+        const useCurrentLocation = document.getElementById('useCurrentLocation');
+
+        // Show popup
+        locationButton.addEventListener('click', function () {
+            locationPopup.classList.remove('hidden');
+            locationOverlay.classList.remove('hidden');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling of background
+        });
+
+        // Hide popup (via X or overlay)
+        function closeLocModal() {
+            locationPopup.classList.add('hidden');
+            locationOverlay.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+        closeLocation.addEventListener('click', closeLocModal);
+        locationOverlay.addEventListener('click', closeLocModal);
+
+        // Use current location example (you can adjust this logic as needed)
+        useCurrentLocation.addEventListener('click', function () {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    function (position) {
+                        alert(`Location set to: Latitude ${position.coords.latitude}, Longitude ${position.coords.longitude}`);
+                        closeLocModal();
+                    },
+                    function (error) {
+                        alert("Couldn't get your location automatically. Please search for your location instead.");
+                    }
+                );
+            } else {
+                alert("Geolocation not supported. Please search for your location instead.");
+            }
+        });
+
+
+        // Prevent click propagation inside popup
+        locationPopup.addEventListener('click', function (e) {
+            e.stopPropagation();
+        });
+
+        // Login/Signup functionality
+        const loginButton = document.getElementById('loginButton');
+        const loginFormPopup = document.getElementById('loginFormPopup');
+        const showLoginForm = document.getElementById('showLoginForm');
+        // const loginPopup = document.getElementById('loginPopup');
+        // const loginOverlay = document.getElementById('loginOverlay');
+        // const showSignupForm = document.getElementById('showSignupForm');
+
+        const showSignupForm = document.getElementById('showSignupForm');
+        const signupFormPopup = document.getElementById('signupFormPopup');
+        const loginPopup = document.getElementById('loginPopup');
+        const loginOverlay = document.getElementById('loginOverlay');
+
+        showSignupForm.addEventListener('click', function () {
+            // Hide initial login/sign up choice popup
+            loginPopup.classList.add('hidden');
+            loginPopup.classList.remove('flex');
+
+            // Show sign up popup and display as flex for centering
+            signupFormPopup.classList.remove('hidden');
+            signupFormPopup.classList.add('flex');
+
+            // Show overlay and ensure it displays block
+            loginOverlay.classList.remove('hidden');
+            loginOverlay.classList.add('block');
+
+            // Prevent background scroll
+            document.body.style.overflow = 'hidden';
+        });
+
+
+
+        function toggleLoginPopup() {
+            loginPopup.classList.toggle('hidden');
+            loginOverlay.classList.toggle('hidden');
+            document.body.style.overflow = loginPopup.classList.contains('hidden') ? '' : 'hidden';
+        }
+
+        function showLoginFormPopup() {
+            loginPopup.classList.add('hidden');
+            loginFormPopup.classList.remove('hidden');
+        }
+
+        function hideLoginFormPopup() {
+            loginFormPopup.classList.add('hidden');
+            loginOverlay.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        loginButton.addEventListener('click', function () {
+            toggleLoginPopup();
+            cartPopup.classList.add('hidden');
+            cartOverlay.classList.add('hidden');
+            locationPopup.classList.add('hidden');
+            locationOverlay.classList.add('hidden');
+        });
+
+        loginOverlay.addEventListener('click', function () {
+            if (!loginFormPopup.classList.contains('hidden')) {
+                hideLoginFormPopup();
+            } else {
+                toggleLoginPopup();
+            }
+        });
+
+        showLoginForm.addEventListener('click', showLoginFormPopup);
+        showSignupForm.addEventListener('click', function () {
+            loginPopup.classList.add('hidden');
+            signupFormPopup.classList.remove('hidden');
+        });
+
+        // Click outside popups closes them cleanly
+        loginOverlay.addEventListener('click', function () {
+            if (!signupFormPopup.classList.contains('hidden')) {
+                // Hide sign up popup
+                signupFormPopup.classList.add('hidden');
+                signupFormPopup.classList.remove('flex');
+
+                // Hide overlay
+                loginOverlay.classList.add('hidden');
+                loginOverlay.classList.remove('block');
+
+                // Enable background scroll
+                document.body.style.overflow = '';
+            } else if (!loginPopup.classList.contains('hidden')) {
+                // Hide login popup
+                loginPopup.classList.add('hidden');
+                loginPopup.classList.remove('flex');
+
+                // Hide overlay
+                loginOverlay.classList.add('hidden');
+                loginOverlay.classList.remove('block');
+
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Simple script to toggle mobile menu (would be expanded in a real implementation)
+        const mobileMenuButton = document.querySelector('button[class*="md:hidden"]');
+        if (mobileMenuButton) {
+            mobileMenuButton.addEventListener('click', function () {
+                alert('Mobile menu would open here in a full implementation');
+            });
+        }
+
+        // Add scroll animation effect
+        document.addEventListener('DOMContentLoaded', function () {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-fadeIn');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.bg-white.p-6').forEach(card => {
+                observer.observe(card);
+            });
+        });
+
+        // Enhanced search functionality
+        document.getElementById('serviceSearchForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const searchTerm = document.getElementById('serviceSearchInput').value.trim().toLowerCase();
+
+            if (!searchTerm) return;
+
+            // Normalize search term for comparison
+            const normalizedSearch = searchTerm.replace(/[-\s]/g, '');
+
+            // First try to find matching main service category
+            const categoryTabs = document.querySelectorAll('.category-tab');
+            let foundMainService = null;
+
+            categoryTabs.forEach(tab => {
+                const tabName = tab.dataset.category.toLowerCase().replace(/[-\s]/g, '');
+                if (tabName.includes(normalizedSearch)) {
+                    foundMainService = tab;
+                }
+            });
+
+            if (foundMainService) {
+                foundMainService.click();
+                document.getElementById('services-section').scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+                return;
+            }
+
+            // Then try to find matching sub-service
+            const subServiceButtons = document.querySelectorAll('.sub-service-btn');
+            let foundSubService = null;
+
+            subServiceButtons.forEach(btn => {
+                const btnText = btn.textContent.toLowerCase().replace(/[-\s]/g, '');
+                if (btnText.includes(normalizedSearch)) {
+                    foundSubService = btn;
+                }
+            });
+
+            if (foundSubService) {
+                // Find the parent service category
+                const parentTab = document.querySelector(`.category-tab[data-category="${foundSubService.closest('#subServices').previousElementSibling.dataset.category}"]`);
+                if (parentTab) {
+                    parentTab.click();
+                }
+
+                setTimeout(() => {
+                    foundSubService.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center'
+                    });
+
+                    // Highlight the matching sub-service
+                    foundSubService.classList.add('bg-indigo-100', 'border-indigo-500');
+                    setTimeout(() => {
+                        foundSubService.classList.remove('bg-indigo-100', 'border-indigo-500');
+                    }, 2000);
+                }, 100);
+                return;
+            }
+
+            // Finally try to find matching service cards
+            const serviceCards = document.querySelectorAll('.service-card');
+            let foundCard = null;
+
+            serviceCards.forEach(card => {
+                const cardName = card.querySelector('h4').textContent.toLowerCase().replace(/[-\s]/g, '');
+                if (cardName.includes(normalizedSearch)) {
+                    foundCard = card;
+                }
+            });
+
+            if (foundCard) {
+                foundCard.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center'
+                });
+
+                // Highlight the matching card
+                foundCard.classList.add('ring-2', 'ring-indigo-500');
+                setTimeout(() => {
+                    foundCard.classList.remove('ring-2', 'ring-indigo-500');
+                }, 2000);
+            }
+        });
+
+        // Update service cards with data attributes when created
+        document.addEventListener('DOMContentLoaded', function () {
+            const observer = new MutationObserver(function (mutations) {
+                mutations.forEach(function (mutation) {
+                    mutation.addedNodes.forEach(function (node) {
+                        if (node.nodeType === 1 && node.classList && node.classList.contains('service-card')) {
+                            const title = node.querySelector('h4');
+                            if (title) {
+                                node.dataset.serviceName = title.textContent.toLowerCase();
+                            }
+                        }
+                    });
+                });
+            });
+
+            // Find Services button scroll functionality
+            document.getElementById('findServicesBtn').addEventListener('click', function (e) {
+                e.preventDefault();
                 document.getElementById('services-section').scrollIntoView({
                     behavior: 'smooth',
                     block: 'start'
                 });
             });
 
-            // Location popup logic
-            const locationButton = document.getElementById('locationButton');
-            const locationPopup = document.getElementById('locationPopup');
-            const locationOverlay = document.getElementById('locationOverlay');
-            const closeLocation = document.getElementById('closeLocation');
-            const useCurrentLocation = document.getElementById('useCurrentLocation');
 
-            // Show popup
-            locationButton.addEventListener('click', function () {
-                locationPopup.classList.remove('hidden');
-                locationOverlay.classList.remove('hidden');
-                document.body.style.overflow = 'hidden'; // Prevent scrolling of background
+            observer.observe(document.querySelector('.grid'), {
+                childList: true,
+                subtree: true
             });
-
-            // Hide popup (via X or overlay)
-            function closeLocModal() {
-                locationPopup.classList.add('hidden');
-                locationOverlay.classList.add('hidden');
-                document.body.style.overflow = '';
-            }
-            closeLocation.addEventListener('click', closeLocModal);
-            locationOverlay.addEventListener('click', closeLocModal);
-
-            // Use current location example (you can adjust this logic as needed)
-            useCurrentLocation.addEventListener('click', function () {
-                if (navigator.geolocation) {
-                    navigator.geolocation.getCurrentPosition(
-                        function (position) {
-                            alert(`Location set to: Latitude ${position.coords.latitude}, Longitude ${position.coords.longitude}`);
-                            closeLocModal();
-                        },
-                        function (error) {
-                            alert("Couldn't get your location automatically. Please search for your location instead.");
-                        }
-                    );
-                } else {
-                    alert("Geolocation not supported. Please search for your location instead.");
-                }
-            });
-
-
-            // Prevent click propagation inside popup
-            locationPopup.addEventListener('click', function (e) {
-                e.stopPropagation();
-            });
-
-            // Login/Signup functionality
-            const loginButton = document.getElementById('loginButton');
-            const loginPopup = document.getElementById('loginPopup');
-            const closeLogin = document.getElementById('closeLogin');
-            const loginChoice = document.getElementById('loginChoice');
-            const loginForm = document.getElementById('loginForm');
-            const signupForm = document.getElementById('signupForm');
-            const showLoginForm = document.getElementById('showLoginForm');
-            const showSignupForm = document.getElementById('showSignupForm');
-            const backToChoiceFromLogin = document.getElementById('backToChoiceFromLogin');
-            const backToChoiceFromSignup = document.getElementById('backToChoiceFromSignup');
-
-            // Helper to reset popup to choices
-            function resetLoginPopup() {
-                loginChoice.classList.remove('hidden');
-                loginForm.classList.add('hidden');
-                signupForm.classList.add('hidden');
-            }
-
-            loginButton.addEventListener('click', function () {
-                loginPopup.classList.toggle('hidden');
-                resetLoginPopup();
-                cartPopup.classList.add('hidden');
-                locationPopup.classList.add('hidden');
-            });
-
-            closeLogin.addEventListener('click', function () {
-                loginPopup.classList.add('hidden');
-                resetLoginPopup();
-            });
-
-            document.addEventListener('click', function (event) {
-                if (!loginPopup.contains(event.target) && event.target !== loginButton) {
-                    loginPopup.classList.add('hidden');
-                    resetLoginPopup();
-                }
-            });
-
-            loginPopup.addEventListener('click', function (e) {
-                e.stopPropagation();
-            });
-
-            // Button events for switching forms
-            showLoginForm.addEventListener('click', function () {
-                loginChoice.classList.add('hidden');
-                loginForm.classList.remove('hidden');
-                signupForm.classList.add('hidden');
-            });
-
-            showSignupForm.addEventListener('click', function () {
-                loginChoice.classList.add('hidden');
-                signupForm.classList.remove('hidden');
-                loginForm.classList.add('hidden');
-            });
-
-            backToChoiceFromLogin.addEventListener('click', resetLoginPopup);
-            backToChoiceFromSignup.addEventListener('click', resetLoginPopup);
-
-            // Simple script to toggle mobile menu (would be expanded in a real implementation)
-            const mobileMenuButton = document.querySelector('button[class*="md:hidden"]');
-            if (mobileMenuButton) {
-                mobileMenuButton.addEventListener('click', function () {
-                    alert('Mobile menu would open here in a full implementation');
-                });
-            }
-
-            // Add scroll animation effect
-            document.addEventListener('DOMContentLoaded', function () {
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            entry.target.classList.add('animate-fadeIn');
-                        }
-                    });
-                }, { threshold: 0.1 });
-
-                document.querySelectorAll('.bg-white.p-6').forEach(card => {
-                    observer.observe(card);
-                });
-            });
-
-            // Enhanced search functionality
-            document.getElementById('serviceSearchForm').addEventListener('submit', function (e) {
-                e.preventDefault();
-                const searchTerm = document.getElementById('serviceSearchInput').value.trim().toLowerCase();
-
-                if (!searchTerm) return;
-
-                // Normalize search term for comparison
-                const normalizedSearch = searchTerm.replace(/[-\s]/g, '');
-
-                // First try to find matching main service category
-                const categoryTabs = document.querySelectorAll('.category-tab');
-                let foundMainService = null;
-
-                categoryTabs.forEach(tab => {
-                    const tabName = tab.dataset.category.toLowerCase().replace(/[-\s]/g, '');
-                    if (tabName.includes(normalizedSearch)) {
-                        foundMainService = tab;
-                    }
-                });
-
-                if (foundMainService) {
-                    foundMainService.click();
-                    document.getElementById('services-section').scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                    return;
-                }
-
-                // Then try to find matching sub-service
-                const subServiceButtons = document.querySelectorAll('.sub-service-btn');
-                let foundSubService = null;
-
-                subServiceButtons.forEach(btn => {
-                    const btnText = btn.textContent.toLowerCase().replace(/[-\s]/g, '');
-                    if (btnText.includes(normalizedSearch)) {
-                        foundSubService = btn;
-                    }
-                });
-
-                if (foundSubService) {
-                    // Find the parent service category
-                    const parentTab = document.querySelector(`.category-tab[data-category="${foundSubService.closest('#subServices').previousElementSibling.dataset.category}"]`);
-                    if (parentTab) {
-                        parentTab.click();
-                    }
-
-                    setTimeout(() => {
-                        foundSubService.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'center'
-                        });
-
-                        // Highlight the matching sub-service
-                        foundSubService.classList.add('bg-indigo-100', 'border-indigo-500');
-                        setTimeout(() => {
-                            foundSubService.classList.remove('bg-indigo-100', 'border-indigo-500');
-                        }, 2000);
-                    }, 100);
-                    return;
-                }
-
-                // Finally try to find matching service cards
-                const serviceCards = document.querySelectorAll('.service-card');
-                let foundCard = null;
-
-                serviceCards.forEach(card => {
-                    const cardName = card.querySelector('h4').textContent.toLowerCase().replace(/[-\s]/g, '');
-                    if (cardName.includes(normalizedSearch)) {
-                        foundCard = card;
-                    }
-                });
-
-                if (foundCard) {
-                    foundCard.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'center'
-                    });
-
-                    // Highlight the matching card
-                    foundCard.classList.add('ring-2', 'ring-indigo-500');
-                    setTimeout(() => {
-                        foundCard.classList.remove('ring-2', 'ring-indigo-500');
-                    }, 2000);
-                }
-            });
-
-            // Update service cards with data attributes when created
-            document.addEventListener('DOMContentLoaded', function () {
-                const observer = new MutationObserver(function (mutations) {
-                    mutations.forEach(function (mutation) {
-                        mutation.addedNodes.forEach(function (node) {
-                            if (node.nodeType === 1 && node.classList && node.classList.contains('service-card')) {
-                                const title = node.querySelector('h4');
-                                if (title) {
-                                    node.dataset.serviceName = title.textContent.toLowerCase();
-                                }
-                            }
-                        });
-                    });
-                });
-
-                // Find Services button scroll functionality
-                document.getElementById('findServicesBtn').addEventListener('click', function (e) {
-                    e.preventDefault();
-                    document.getElementById('services-section').scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                });
-
-
-                observer.observe(document.querySelector('.grid'), {
-                    childList: true,
-                    subtree: true
-                });
-            });
-        </script>
+        });
+    </script>
 </body>
 
 </html>
