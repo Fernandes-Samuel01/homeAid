@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Become a Provider - homeAid</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body class="bg-white min-h-screen font-sans">
+    <header class="bg-gradient-to-r from-purple-600 to-purple-800 py-4 px-8 flex items-center">
+        <div class="mb-8 md:mb-0">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-rocket text-white text-2xl"></i>
+                <span class="text-white font-bold text-xl">homeAid</span>
+            </div>
+        </div>
+    </header>
+    <div class="flex flex-col lg:flex-row min-h-screen">
+        <div class="lg:w-1/2 p-12 flex items-center justify-center bg-gray-50">
+            <img src="https://static.vecteezy.com/system/resources/previews/007/117/231/non_2x/home-repair-service-group-of-construction-engineers-with-building-equipment-tools-work-at-house-repairing-carpenter-repairman-builder-master-renovation-apartment-cartoon-flat-illustration-vector.jpg"
+                alt="Professional at work" class="rounded-xl shadow-lg max-w-full h-auto" />
+        </div>
+        <div class="lg:w-1/2 p-12 flex flex-col justify-center max-w-md mx-auto">
+            <h1 class="text-4xl font-bold mb-6 text-gray-900">Earn money your way</h1>
+            <form class="space-y-6">
+                <div>
+                    <label for="area" class="block mb-2 font-medium text-gray-700">Select your area</label>
+                    <select id="area" name="area" required
+                        class="block w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        <option value="" disabled selected>Select your area</option>
+                        <option>Albany</option>
+                        <option>Bangalore</option>
+                        <option>Delhi</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="category" class="block mb-2 font-medium text-gray-700">Choose a category</label>
+                    <select id="category" name="category" required
+                        class="block w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        <option value="" disabled selected>Select a category</option>
+                        <option>Help Moving</option>
+                        <option>Cleaning</option>
+                        <option>Plumbing</option>
+                        <option>Electrical</option>
+                    </select>
+                </div>
+                <button type="submit"
+                    class="w-full bg-green-700 text-white py-3 rounded-lg font-semibold hover:bg-green-800 transition">Get
+                    Started</button>
+            </form>
+            <p class="mt-8 text-center text-gray-600">
+                Already have an account?
+                <button id="loginButton" class="text-indigo-600 hover:underline font-semibold ml-1">Login</button> |
+                <button id="signupButton" class="text-indigo-600 hover:underline font-semibold mx-1">Sign up</button>
+            </p>
+        </div>
+    </div>
+
+    <!-- Informational Section -->
+    <section class="py-16 px-8 bg-white">
+        <div class="max-w-6xl mx-auto text-center">
+            <h2 class="text-4xl font-bold text-purple-900 mb-4">Flexible work, at your fingertips</h2>
+            <p class="text-xl text-purple-800 mb-12 max-w-2xl mx-auto">
+                Find local jobs that fit your skills and schedule. With homeAid, you have the freedom and support to be
+                your own boss.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="text-left p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-purple-100 p-3 rounded-full mr-4">
+                            <i class="fas fa-user-tie text-purple-700 text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-purple-900">Be your own boss</h3>
+                    </div>
+                    <p class="text-purple-800">
+                        Work how, when, and where you want. Offer services in 50+ categories and set a flexible schedule
+                        and work area.
+                    </p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="text-left p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-purple-100 p-3 rounded-full mr-4">
+                            <i class="fas fa-money-bill-wave text-purple-700 text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-purple-900">Set your own rates</h3>
+                    </div>
+                    <p class="text-purple-800">
+                        You keep 100% of what you charge, plus tips! Invoice and get paid directly through our secure
+                        payment system.
+                    </p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="text-left p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-purple-100 p-3 rounded-full mr-4">
+                            <i class="fas fa-chart-line text-purple-700 text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-purple-900">Grow your business</h3>
+                    </div>
+                    <p class="text-purple-800">
+                        We connect you with clients in your area, and ways to market yourself — so you can focus on what
+                        you do best.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What is homeAid Section -->
+    <section class="py-16 px-4 sm:px-8 bg-white">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <!-- Image Column -->
+            <div class="order-1 lg:order-none">
+                <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+                    alt="Service professional at work" class="rounded-xl shadow-md w-full h-auto object-cover">
+            </div>
+
+            <!-- Text Column -->
+            <div class="order-2 lg:order-none">
+                <h2 class="text-3xl md:text-4xl font-bold text-purple-900 mb-6">What is homeAid?</h2>
+                <p class="text-lg text-purple-800 leading-relaxed">
+                    homeAid is an online platform designed to empower service providers by connecting them with local
+                    clients in need of various home and professional services. It allows providers to work flexibly,
+                    choosing their schedules, rates, and service areas. homeAid helps service providers grow their
+                    business by offering access to a wide range of job categories and opportunities in their region. The
+                    platform ensures secure and direct payment processing, letting providers keep 100% of their earnings
+                    plus tips. With trusted and vetted professionals, homeAid creates an environment where service
+                    providers can be their own boss while receiving support to market and manage their services. It aims
+                    to simplify the process of finding customers, scheduling jobs, and growing a sustainable service
+                    business with freedom and flexibility. homeAid is committed to helping providers succeed in an easy,
+                    transparent, and professional manner.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Getting Started Section -->
+    <section class="py-16 px-4 sm:px-8 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-purple-900 text-center mb-12">Getting Started</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Step 1 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm">
+                    <div class="flex justify-center mb-4">
+                        <div class="bg-purple-100 p-4 rounded-full">
+                            <i class="fas fa-user-plus text-purple-700 text-2xl"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold text-purple-900 text-center mb-2">1. Sign up</h3>
+                    <p class="text-purple-800 text-center">
+                        Create your account. If you are new then click on sign up or else login.
+                    </p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm">
+                    <div class="flex justify-center mb-4">
+                        <div class="bg-purple-100 p-4 rounded-full">
+                            <i class="fas fa-id-card text-purple-700 text-2xl"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold text-purple-900 text-center mb-2">2. Build your profile</h3>
+                    <p class="text-purple-800 text-center">
+                        Select what services you want to offer and where.
+                    </p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm">
+                    <div class="flex justify-center mb-4">
+                        <div class="bg-purple-100 p-4 rounded-full">
+                            <i class="fas fa-check-circle text-purple-700 text-2xl"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold text-purple-900 text-center mb-2">3. Verify your eligibility</h3>
+                    <p class="text-purple-800 text-center">
+                        Confirm your identity and submit business verifications, as required.
+                    </p>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm">
+                    <div class="flex justify-center mb-4">
+                        <div class="bg-purple-100 p-4 rounded-full">
+                            <i class="fas fa-dollar-sign text-purple-700 text-2xl"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold text-purple-900 text-center mb-2">4. Set service rates</h3>
+                    <p class="text-purple-800 text-center">
+                        List all the services you provide under your domain and specific rates for each service, also
+                        set your consultation fee.
+                    </p>
+                </div>
+
+                <!-- Step 5 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm">
+                    <div class="flex justify-center mb-4">
+                        <div class="bg-purple-100 p-4 rounded-full">
+                            <i class="fas fa-calendar-alt text-purple-700 text-2xl"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold text-purple-900 text-center mb-2">5. Set your schedule</h3>
+                    <p class="text-purple-800 text-center">
+                        Set your weekly availability and opt in to receive same-day jobs.
+                    </p>
+                </div>
+
+                <!-- Step 6 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm">
+                    <div class="flex justify-center mb-4">
+                        <div class="bg-purple-100 p-4 rounded-full">
+                            <i class="fas fa-briefcase text-purple-700 text-2xl"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold text-purple-900 text-center mb-2">6. Start getting jobs</h3>
+                    <p class="text-purple-800 text-center">
+                        Grow your business on your own terms.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Login Modal -->
+    <div id="loginOverlay" class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-50 hidden"></div>
+    <div id="loginPopup" class="fixed inset-0 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-xl shadow-2xl p-8 w-full max-w-md mx-4">
+            <div class="flex items-center justify-center space-x-2 mb-6">
+                <i class="fas fa-rocket text-purple-700 text-2xl"></i>
+                <span class="text-purple-700 font-bold text-2xl">homeAid</span>
+            </div>
+
+            <form class="space-y-4">
+                <div>
+                    <label for="loginEmail" class="block text-gray-700 mb-1">Email Address</label>
+                    <input type="email" id="loginEmail" required
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
+                </div>
+                <div>
+                    <label for="loginPassword" class="block text-gray-700 mb-1">Password</label>
+                    <input type="password" id="loginPassword" required
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
+                    <div class="text-right mt-1">
+                        <a href="#" class="text-purple-600 hover:underline text-sm">Forgot password?</a>
+                    </div>
+                </div>
+                <button type="submit"
+                    class="w-full bg-gradient-to-r from-purple-600 to-purple-800 text-white py-3 rounded-lg font-semibold hover:opacity-90 transition">
+                    Log In
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div id="signupPopup" class="fixed inset-0 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-xl shadow-2xl p-8 w-full max-w-md mx-4">
+            <div class="flex items-center justify-center space-x-2 mb-6">
+                <i class="fas fa-rocket text-purple-700 text-2xl"></i>
+                <span class="text-purple-700 font-bold text-2xl">homeAid</span>
+            </div>
+
+            <form class="space-y-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label for="firstName" class="block text-gray-700 mb-1">First Name</label>
+                        <input type="text" id="firstName" required
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
+                    </div>
+                    <div>
+                        <label for="lastName" class="block text-gray-700 mb-1">Last Name</label>
+                        <input type="text" id="lastName" required
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
+                    </div>
+                </div>
+                <div>
+                    <label for="signupEmail" class="block text-gray-700 mb-1">Email Address</label>
+                    <input type="email" id="signupEmail" required
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
+                </div>
+                <div>
+                    <label for="phone" class="block text-gray-700 mb-1">Phone Number</label>
+                    <div class="flex">
+                        <select
+                            class="w-1/4 px-2 py-2 border border-gray-300 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
+                            <option>+1</option>
+                            <option>+44</option>
+                            <option>+91</option>
+                        </select>
+                        <input type="tel" id="phone" required
+                            class="w-full px-4 py-2 border-t border-r border-b border-gray-300 rounded-r-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
+                    </div>
+                </div>
+                <div>
+                    <label for="signupPassword" class="block text-gray-700 mb-1">Password</label>
+                    <input type="password" id="signupPassword" required
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
+                </div>
+                <button type="submit"
+                    class="w-full bg-gradient-to-r from-purple-600 to-purple-800 text-white py-3 rounded-lg font-semibold hover:opacity-90 transition">
+                    Create Account
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Modal toggle functions
+        const toggleVerificationModal = (show) => {
+            const modal = document.getElementById("verificationModal");
+            const overlay = document.getElementById("verificationOverlay");
+
+            if (show) {
+                modal.classList.remove("hidden");
+                modal.classList.add("flex");
+                overlay.classList.remove("hidden");
+                overlay.classList.add("block");
+                document.body.style.overflow = "hidden";
+            } else {
+                modal.classList.remove("flex");
+                modal.classList.add("hidden");
+                overlay.classList.remove("block");
+                overlay.classList.add("hidden");
+                document.body.style.overflow = "auto";
+            }
+        };
+
+        const toggleModal = (modalId, show) => {
+            const modal = document.getElementById(modalId);
+            const overlay = document.getElementById("loginOverlay");
+
+            if (show) {
+                modal.classList.remove("hidden");
+                modal.classList.add("flex");
+                overlay.classList.remove("hidden");
+                overlay.classList.add("block");
+                document.body.style.overflow = "hidden";
+            } else {
+                modal.classList.remove("flex");
+                modal.classList.add("hidden");
+                overlay.classList.remove("block");
+                overlay.classList.add("hidden");
+                document.body.style.overflow = "auto";
+            }
+        };
+
+        // Event listeners for buttons
+        document.getElementById("loginButton").addEventListener("click", () => toggleModal("loginPopup", true));
+        document.getElementById("signupButton").addEventListener("click", () => toggleModal("signupPopup", true));
+
+        // Close modals when clicking overlay
+        document.getElementById("loginOverlay").addEventListener("click", () => {
+            toggleModal("loginPopup", false);
+            toggleModal("signupPopup", false);
+        });
+
+        // Close modals with Escape key
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape") {
+                toggleModal("loginPopup", false);
+                toggleModal("signupPopup", false);
+                toggleVerificationModal(false);
+            }
+        });
+
+        // Get Started button event
+        document.querySelector('form button[type="submit"]').addEventListener("click", (e) => {
+            e.preventDefault();
+            toggleVerificationModal(true);
+        });
+
+        // Verification form submission
+        document.getElementById("verificationForm").addEventListener("submit", (e) => {
+            e.preventDefault();
+            const errorElement = document.getElementById("verificationError");
+
+            // Here you would implement actual verification logic
+            // This is just a placeholder for the validation
+            const isValid = Math.random() > 0.3; // Simulate 70% success rate
+
+            if (isValid) {
+                errorElement.classList.add("hidden");
+                alert("Verification successful! Account created.");
+                toggleVerificationModal(false);
+                // Here you would proceed with account creation
+            } else {
+                errorElement.classList.remove("hidden");
+            }
+        });
+
+        // Close verification modal when clicking overlay
+        document.getElementById("verificationOverlay").addEventListener("click", () => {
+            toggleVerificationModal(false);
+        });
+    </script>
+
+    <!-- Verification Modal -->
+    <div id="verificationOverlay" class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-50 hidden"></div>
+    <div id="verificationModal" class="fixed inset-0 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-xl shadow-2xl p-6 w-full max-w-md mx-4 max-h-[90vh] overflow-auto">
+            <div class="text-center mb-6">
+                <h2 class="text-2xl font-bold text-purple-700">Service Provider Verification</h2>
+                <p class="text-gray-500 mt-2">Complete your profile to get started</p>
+            </div>
+
+            <form id="verificationForm" class="space-y-5" onsubmit="return false;">
+                <!-- Photo of Service Provider -->
+                <div class="flex flex-col items-center">
+                    <div class="relative group">
+                        <div id="profilePhotoContainer"
+                            class="w-24 h-24 rounded-full bg-gray-100 border-2 border-dashed border-gray-300 flex items-center justify-center cursor-pointer overflow-hidden">
+                            <i id="profilePhotoIcon" class="fas fa-user text-gray-400 text-3xl"></i>
+                            <img id="profilePhotoPreview" class="hidden w-full h-full object-cover" src=""
+                                alt="Profile Preview" />
+                        </div>
+                    </div>
+                    <p class="text-gray-600 text-sm mt-2">Photo of Service Provider</p>
+                    <div class="flex gap-4 mt-1">
+                        <button type="button" onclick="openCamera('profile')"
+                            class="text-xs text-purple-600 hover:underline">Take Photo</button>
+                        <button type="button" onclick="triggerUploadPhoto('profilePhotoInput')"
+                            class="text-xs text-purple-600 hover:underline">Upload Photo</button>
+                    </div>
+                    <input type="file" id="profilePhotoInput" accept="image/*" class="hidden" />
+                </div>
+
+                <!-- Name -->
+                <div>
+                    <label for="providerName" class="block text-gray-700 mb-2">Full Name</label>
+                    <input type="text" id="providerName" required
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" />
+                </div>
+
+                <!-- Phone Number -->
+                <div>
+                    <label for="providerPhone" class="block text-gray-700 mb-2">Phone Number</label>
+                    <input type="tel" id="providerPhone" required
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" />
+                </div>
+
+                <!-- Verification ID Type -->
+                <div>
+                    <label for="verificationType" class="block text-gray-700 mb-2">Verification ID Type</label>
+                    <select id="verificationType" required
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
+                        <option value="" disabled selected>Select ID Type</option>
+                        <option value="aadhar">Aadhar Card</option>
+                        <option value="pan">PAN Card</option>
+                        <option value="passport">Passport</option>
+                    </select>
+                </div>
+
+                <!-- Photo of Verification ID -->
+                <div>
+                    <label class="block text-gray-700 mb-2">Photo of Verification ID</label>
+                    <div class="relative group">
+                        <div id="idPhotoContainer"
+                            class="w-full h-32 bg-gray-100 border-2 border-dashed border-gray-300 rounded-lg flex flex-col items-center justify-center cursor-pointer overflow-hidden">
+                            <i id="idPhotoIcon" class="fas fa-id-card text-gray-400 text-3xl mb-2"></i>
+                            <span class="text-gray-500 text-sm">Click to upload ID photo</span>
+                            <img id="idPhotoPreview" class="hidden w-full h-full object-contain" src=""
+                                alt="ID Preview" />
+                        </div>
+                    </div>
+                    <div class="flex gap-4 mt-1">
+                        <button type="button" onclick="openCamera('id')"
+                            class="text-xs text-purple-600 hover:underline">Take Photo</button>
+                        <button type="button" onclick="triggerUploadPhoto('idPhotoInput')"
+                            class="text-xs text-purple-600 hover:underline">Upload Photo</button>
+                    </div>
+                    <input type="file" id="idPhotoInput" accept="image/*" class="hidden" />
+                </div>
+
+                <!-- Error Message -->
+                <div id="verificationError" class="text-red-500 text-sm hidden">
+                    Verification failed. Please ensure the name and photo match your ID details.
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit"
+                    class="w-full bg-gradient-to-r from-purple-600 to-purple-800 text-white py-3 rounded-lg font-semibold hover:opacity-90 transition mt-4">
+                    Create Account
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Camera Capture Modal -->
+    <div id="cameraModal" class="fixed inset-0 z-60 flex items-center justify-center bg-black bg-opacity-80 hidden">
+        <div class="bg-white rounded-xl shadow-lg p-4 max-w-md w-full flex flex-col items-center">
+            <video id="cameraVideo" autoplay playsinline class="w-full rounded-lg"></video>
+            <div class="flex justify-center gap-4 mt-4">
+                <button id="captureBtn"
+                    class="px-6 py-2 rounded bg-purple-700 text-white font-semibold hover:bg-purple-800 transition">Capture</button>
+                <button id="closeCameraBtn"
+                    class="px-6 py-2 rounded border border-gray-300 text-gray-700 hover:bg-gray-100 transition">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentCameraTarget = null; // "profile" or "id"
+        let videoStream = null;
+
+        // Open device camera and show capture modal
+        function openCamera(target) {
+            currentCameraTarget = target; // save current target
+            const cameraModal = document.getElementById("cameraModal");
+            const video = document.getElementById("cameraVideo");
+
+            // Show modal
+            cameraModal.classList.remove("hidden");
+
+            // Request camera access
+            navigator.mediaDevices.getUserMedia({ video: true }).then((stream) => {
+                videoStream = stream;
+                video.srcObject = stream;
+                video.play();
+            }).catch((err) => {
+                alert("Camera access denied or not available.");
+                closeCamera();
+            });
+        }
+
+        // Capture image from video stream
+        function capturePhoto() {
+            const video = document.getElementById("cameraVideo");
+            const canvas = document.createElement("canvas");
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            const ctx = canvas.getContext("2d");
+            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+            const imageDataURL = canvas.toDataURL("image/png");
+
+            if (currentCameraTarget === "profile") {
+                // Show preview and hide icon
+                const profilePreview = document.getElementById("profilePhotoPreview");
+                profilePreview.src = imageDataURL;
+                profilePreview.classList.remove("hidden");
+                document.getElementById("profilePhotoIcon").classList.add("hidden");
+
+                // Clear file input value (optional)
+                document.getElementById("profilePhotoInput").value = "";
+            } else if (currentCameraTarget === "id") {
+                const idPreview = document.getElementById("idPhotoPreview");
+                idPreview.src = imageDataURL;
+                idPreview.classList.remove("hidden");
+                document.getElementById("idPhotoIcon").classList.add("hidden");
+
+                document.getElementById("idPhotoInput").value = "";
+            }
+            closeCamera();
+        }
+
+        function closeCamera() {
+            const cameraModal = document.getElementById("cameraModal");
+            const video = document.getElementById("cameraVideo");
+
+            // Stop all tracks to close camera
+            if (videoStream) {
+                videoStream.getTracks().forEach(track => track.stop());
+                videoStream = null;
+            }
+
+            video.pause();
+            video.srcObject = null;
+            cameraModal.classList.add("hidden");
+        }
+
+        // Upload photo from file input
+        function triggerUploadPhoto(inputId) {
+            const input = document.getElementById(inputId);
+            input.removeAttribute("capture");
+            input.click();
+        }
+
+        // Profile photo preview file input
+        document.getElementById('profilePhotoInput').addEventListener('change', function (e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (event) {
+                    const preview = document.getElementById('profilePhotoPreview');
+                    preview.src = event.target.result;
+                    preview.classList.remove('hidden');
+                    document.getElementById('profilePhotoIcon').classList.add('hidden');
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // ID photo preview file input
+        document.getElementById('idPhotoInput').addEventListener('change', function (e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (event) {
+                    const preview = document.getElementById('idPhotoPreview');
+                    preview.src = event.target.result;
+                    preview.classList.remove('hidden');
+                    document.getElementById('idPhotoIcon').classList.add('hidden');
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Capture button event
+        document.getElementById("captureBtn").addEventListener("click", capturePhoto);
+
+        // Close camera modal
+        document.getElementById("closeCameraBtn").addEventListener("click", closeCamera);
+    </script>
+
+
+    <footer class="bg-gradient-to-r from-purple-600 to-purple-800 text-white py-12 px-8">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
+            <!-- Logo -->
+            <div class="mb-8 md:mb-0">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-rocket text-white text-2xl"></i>
+                    <span class="text-white font-bold text-xl">homeAid</span>
+                </div>
+            </div>
+            <div>
+                <h3 class="font-bold mb-4">Company</h3>
+                <ul class="space-y-2">
+                    <li><a href="#" class="hover:underline">About Us</a></li>
+                    <li><a href="#" class="hover:underline">Contact Us</a></li>
+                    <li><a href="#" class="hover:underline">Careers</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="font-bold mb-4">For customers</h3>
+                <ul class="space-y-2">
+                    <li><a href="#" class="hover:underline">HomeAid Reviews</a></li>
+                    <li><a href="#" class="hover:underline">Categories Near You</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="font-bold mb-4">For professionals</h3>
+                <ul class="space-y-2">
+                    <li><a href="#" class="hover:underline">Terms and Conditions</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="max-w-6xl mx-auto mt-12 pt-6 border-t border-purple-500 text-center">
+            <p>© Copyright 2025 HomeAid Ltd. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+
+</html>
