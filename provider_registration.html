@@ -10,55 +10,82 @@
 </head>
 
 <body class="bg-white min-h-screen font-sans">
+
     <header class="bg-gradient-to-r from-purple-600 to-purple-800 py-4 px-8 flex items-center">
         <div class="mb-8 md:mb-0">
-            <div class="flex items-center space-x-2">
-                <i class="fas fa-rocket text-white text-2xl"></i>
-                <span class="text-white font-bold text-xl">homeAid</span>
-            </div>
+            <div class="flex items-center space-x-2"> <i class="fas fa-rocket text-white text-2xl"></i> <span
+                    class="text-white font-bold text-xl">homeAid</span> </div>
         </div>
     </header>
+
     <div class="flex flex-col lg:flex-row min-h-screen">
-        <div class="lg:w-1/2 p-12 flex items-center justify-center bg-gray-50">
-            <img src="https://static.vecteezy.com/system/resources/previews/007/117/231/non_2x/home-repair-service-group-of-construction-engineers-with-building-equipment-tools-work-at-house-repairing-carpenter-repairman-builder-master-renovation-apartment-cartoon-flat-illustration-vector.jpg"
-                alt="Professional at work" class="rounded-xl shadow-lg max-w-full h-auto" />
-        </div>
+        <div class="lg:w-1/2 p-12 flex items-center justify-center bg-gray-50"> <img
+                src="https://static.vecteezy.com/system/resources/previews/007/117/231/non_2x/home-repair-service-group-of-construction-engineers-with-building-equipment-tools-work-at-house-repairing-carpenter-repairman-builder-master-renovation-apartment-cartoon-flat-illustration-vector.jpg"
+                alt="Professional at work" class="rounded-xl shadow-lg max-w-full h-auto" /> </div>
         <div class="lg:w-1/2 p-12 flex flex-col justify-center max-w-md mx-auto">
             <h1 class="text-4xl font-bold mb-6 text-gray-900">Earn money your way</h1>
             <form class="space-y-6">
-                <div>
-                    <label for="area" class="block mb-2 font-medium text-gray-700">Select your area</label>
-                    <select id="area" name="area" required
+                <div> <label for="area" class="block mb-2 font-medium text-gray-700">Select your area</label> <select
+                        id="area" name="area" required
                         class="block w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
                         <option value="" disabled selected>Select your area</option>
-                        <option>Albany</option>
-                        <option>Bangalore</option>
-                        <option>Delhi</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="category" class="block mb-2 font-medium text-gray-700">Choose a category</label>
+                        <option>Andhra Pradesh</option>
+                        <option>Arunachal Pradesh</option>
+                        <option>Assam</option>
+                        <option>Bihar</option>
+                        <option>Chhattisgarh</option>
+                        <option>Goa</option>
+                        <option>Gujarat</option>
+                        <option>Haryana</option>
+                        <option>Himachal Pradesh</option>
+                        <option>Jharkhand</option>
+                        <option>Karnataka</option>
+                        <option>Kerala</option>
+                        <option>Madhya Pradesh</option>
+                        <option>Maharashtra</option>
+                        <option>Manipur</option>
+                        <option>Meghalaya</option>
+                        <option>Mizoram</option>
+                        <option>Nagaland</option>
+                        <option>Odisha</option>
+                        <option>Punjab</option>
+                        <option>Rajasthan</option>
+                        <option>Sikkim</option>
+                        <option>Tamil Nadu</option>
+                        <option>Telangana</option>
+                        <option>Tripura</option>
+                        <option>Uttar Pradesh</option>
+                        <option>Uttarakhand</option>
+                        <option>West Bengal</option>
+                    </select> </div>
+                <div> <label for="category" class="block mb-2 font-medium text-gray-700">Choose a category</label>
                     <select id="category" name="category" required
                         class="block w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
                         <option value="" disabled selected>Select a category</option>
-                        <option>Help Moving</option>
-                        <option>Cleaning</option>
                         <option>Plumbing</option>
-                        <option>Electrical</option>
+                        <option>Cleaning</option>
+                        <option>Appliance</option>
+                        <option>Carpentry</option>
+                        <option>Pest</option>
+                        <option>Painting</option>
+                        <option>HVAC</option>
+                        <option>Lawn</option>
+                        <option>Roofing</option>
+                        <option>Windows</option>
+                        <option>Security</option>
+                        <option>Sanitization</option>
+                        <option>Junk</option>
+                        <option>Moving</option>
                     </select>
-                </div>
-                <button type="submit"
-                    class="w-full bg-green-700 text-white py-3 rounded-lg font-semibold hover:bg-green-800 transition">Get
-                    Started</button>
+                </div> <button id="getStartedBtn" type="button"
+                    class="w-full bg-green-700 text-white py-3 rounded-lg font-semibold hover:bg-green-800 transition">
+                    Get Started </button>
             </form>
-            <p class="mt-8 text-center text-gray-600">
-                Already have an account?
-                <button id="loginButton" class="text-indigo-600 hover:underline font-semibold ml-1">Login</button> |
-                <button id="signupButton" class="text-indigo-600 hover:underline font-semibold mx-1">Sign up</button>
-            </p>
+            <p class="mt-8 text-center text-gray-600"> Already have an account? <button id="loginButton"
+                    class="text-indigo-600 hover:underline font-semibold ml-1">Login</button> | <button
+                    id="signupButton" class="text-indigo-600 hover:underline font-semibold mx-1">Sign up</button> </p>
         </div>
     </div>
-
     <!-- Informational Section -->
     <section class="py-16 px-8 bg-white">
         <div class="max-w-6xl mx-auto text-center">
@@ -69,7 +96,6 @@
             </p>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Feature 1 -->
                 <div class="text-left p-6">
                     <div class="flex items-center mb-4">
                         <div class="bg-purple-100 p-3 rounded-full mr-4">
@@ -83,7 +109,6 @@
                     </p>
                 </div>
 
-                <!-- Feature 2 -->
                 <div class="text-left p-6">
                     <div class="flex items-center mb-4">
                         <div class="bg-purple-100 p-3 rounded-full mr-4">
@@ -97,7 +122,6 @@
                     </p>
                 </div>
 
-                <!-- Feature 3 -->
                 <div class="text-left p-6">
                     <div class="flex items-center mb-4">
                         <div class="bg-purple-100 p-3 rounded-full mr-4">
@@ -117,13 +141,11 @@
     <!-- What is homeAid Section -->
     <section class="py-16 px-4 sm:px-8 bg-white">
         <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <!-- Image Column -->
             <div class="order-1 lg:order-none">
-                <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+                <img src="https://mobisoftinfotech.com/resources/wp-content/uploads/2018/08/Banner.png"
                     alt="Service professional at work" class="rounded-xl shadow-md w-full h-auto object-cover">
             </div>
 
-            <!-- Text Column -->
             <div class="order-2 lg:order-none">
                 <h2 class="text-3xl md:text-4xl font-bold text-purple-900 mb-6">What is homeAid?</h2>
                 <p class="text-lg text-purple-800 leading-relaxed">
@@ -148,7 +170,6 @@
             <h2 class="text-3xl md:text-4xl font-bold text-purple-900 text-center mb-12">Getting Started</h2>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Step 1 -->
                 <div class="bg-white p-6 rounded-xl shadow-sm">
                     <div class="flex justify-center mb-4">
                         <div class="bg-purple-100 p-4 rounded-full">
@@ -161,7 +182,6 @@
                     </p>
                 </div>
 
-                <!-- Step 2 -->
                 <div class="bg-white p-6 rounded-xl shadow-sm">
                     <div class="flex justify-center mb-4">
                         <div class="bg-purple-100 p-4 rounded-full">
@@ -174,7 +194,6 @@
                     </p>
                 </div>
 
-                <!-- Step 3 -->
                 <div class="bg-white p-6 rounded-xl shadow-sm">
                     <div class="flex justify-center mb-4">
                         <div class="bg-purple-100 p-4 rounded-full">
@@ -187,7 +206,6 @@
                     </p>
                 </div>
 
-                <!-- Step 4 -->
                 <div class="bg-white p-6 rounded-xl shadow-sm">
                     <div class="flex justify-center mb-4">
                         <div class="bg-purple-100 p-4 rounded-full">
@@ -201,7 +219,6 @@
                     </p>
                 </div>
 
-                <!-- Step 5 -->
                 <div class="bg-white p-6 rounded-xl shadow-sm">
                     <div class="flex justify-center mb-4">
                         <div class="bg-purple-100 p-4 rounded-full">
@@ -214,7 +231,6 @@
                     </p>
                 </div>
 
-                <!-- Step 6 -->
                 <div class="bg-white p-6 rounded-xl shadow-sm">
                     <div class="flex justify-center mb-4">
                         <div class="bg-purple-100 p-4 rounded-full">
@@ -233,268 +249,178 @@
     <!-- Login Modal -->
     <div id="loginOverlay" class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-50 hidden"></div>
     <div id="loginPopup" class="fixed inset-0 flex items-center justify-center z-50 hidden">
-        <div class="bg-white rounded-xl shadow-2xl p-8 w-full max-w-md mx-4">
-            <div class="flex items-center justify-center space-x-2 mb-6">
-                <i class="fas fa-rocket text-purple-700 text-2xl"></i>
-                <span class="text-purple-700 font-bold text-2xl">homeAid</span>
+        <div class="relative bg-white rounded-xl shadow-2xl p-8 w-full max-w-md mx-4 overflow-hidden">
+            <div class="absolute inset-0 z-0 pointer-events-none">
+                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1470&amp;q=80"
+                    alt="Background" class="w-full h-full object-cover opacity-20" />
             </div>
-
-            <form class="space-y-4">
-                <div>
-                    <label for="loginEmail" class="block text-gray-700 mb-1">Email Address</label>
-                    <input type="email" id="loginEmail" required
-                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
+            <div class="relative z-10">
+                <div class="flex items-center justify-center space-x-2 mb-6">
+                    <i class="fas fa-rocket text-purple-700 text-2xl"></i>
+                    <span class="text-purple-700 font-bold text-2xl">homeAid</span>
                 </div>
-                <div>
-                    <label for="loginPassword" class="block text-gray-700 mb-1">Password</label>
-                    <input type="password" id="loginPassword" required
-                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
-                    <div class="text-right mt-1">
-                        <a href="#" class="text-purple-600 hover:underline text-sm">Forgot password?</a>
+                <form class="space-y-4">
+                    <div>
+                        <label for="loginEmail" class="block text-gray-700 mb-1">Email Address</label>
+                        <input type="email" id="loginEmail" required
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 bg-white bg-opacity-90" />
                     </div>
-                </div>
-                <button type="submit"
-                    class="w-full bg-gradient-to-r from-purple-600 to-purple-800 text-white py-3 rounded-lg font-semibold hover:opacity-90 transition">
-                    Log In
-                </button>
-            </form>
+                    <div>
+                        <label for="loginPassword" class="block text-gray-700 mb-1">Password</label>
+                        <input type="password" id="loginPassword" required
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 bg-white bg-opacity-90" />
+                        <div class="text-right mt-1">
+                            <a href="#" class="text-purple-600 hover:underline text-sm">Forgot password?</a>
+                        </div>
+                    </div>
+                    <button type="submit"
+                        class="w-full bg-gradient-to-r from-purple-600 to-purple-800 text-white py-3 rounded-lg font-semibold hover:opacity-90 transition">
+                        Log In
+                    </button>
+                </form>
+            </div>
         </div>
     </div>
 
     <!-- Signup Modal -->
     <div id="signupPopup" class="fixed inset-0 flex items-center justify-center z-50 hidden">
-        <div class="bg-white rounded-xl shadow-2xl p-8 w-full max-w-md mx-4">
-            <div class="flex items-center justify-center space-x-2 mb-6">
-                <i class="fas fa-rocket text-purple-700 text-2xl"></i>
-                <span class="text-purple-700 font-bold text-2xl">homeAid</span>
+        <div class="relative bg-white rounded-xl shadow-2xl p-8 w-full max-w-md mx-4 overflow-hidden">
+            <div class="absolute inset-0 z-0 pointer-events-none">
+                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1470&amp;q=80"
+                    alt="Background" class="w-full h-full object-cover opacity-20" />
             </div>
-
-            <form class="space-y-4">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label for="firstName" class="block text-gray-700 mb-1">First Name</label>
-                        <input type="text" id="firstName" required
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
+            <div class="relative z-10">
+                <div class="flex items-center justify-center space-x-2 mb-6">
+                    <i class="fas fa-rocket text-purple-700 text-2xl"></i>
+                    <span class="text-purple-700 font-bold text-2xl">homeAid</span>
+                </div>
+                <form class="space-y-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label for="firstName" class="block text-gray-700 mb-1">First Name</label>
+                            <input type="text" id="firstName" required
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 bg-white bg-opacity-90" />
+                        </div>
+                        <div>
+                            <label for="lastName" class="block text-gray-700 mb-1">Last Name</label>
+                            <input type="text" id="lastName" required
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 bg-white bg-opacity-90" />
+                        </div>
                     </div>
                     <div>
-                        <label for="lastName" class="block text-gray-700 mb-1">Last Name</label>
-                        <input type="text" id="lastName" required
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
+                        <label for="signupEmail" class="block text-gray-700 mb-1">Email Address</label>
+                        <input type="email" id="signupEmail" required
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 bg-white bg-opacity-90" />
                     </div>
-                </div>
-                <div>
-                    <label for="signupEmail" class="block text-gray-700 mb-1">Email Address</label>
-                    <input type="email" id="signupEmail" required
-                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
-                </div>
-                <div>
-                    <label for="phone" class="block text-gray-700 mb-1">Phone Number</label>
-                    <div class="flex">
-                        <select
-                            class="w-1/4 px-2 py-2 border border-gray-300 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
-                            <option>+1</option>
-                            <option>+44</option>
-                            <option>+91</option>
-                        </select>
-                        <input type="tel" id="phone" required
-                            class="w-full px-4 py-2 border-t border-r border-b border-gray-300 rounded-r-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
+                    <div>
+                        <label for="phone" class="block text-gray-700 mb-1">Phone Number</label>
+                        <div class="flex">
+                            <select
+                                class="w-1/4 px-2 py-2 border border-gray-300 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-purple-500 bg-white bg-opacity-90">
+                                <option>+1</option>
+                                <option>+44</option>
+                                <option>+91</option>
+                            </select>
+                            <input type="tel" id="phone" required
+                                class="w-full px-4 py-2 border rounded-r-lg border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 bg-white bg-opacity-90" />
+                        </div>
                     </div>
-                </div>
-                <div>
-                    <label for="signupPassword" class="block text-gray-700 mb-1">Password</label>
-                    <input type="password" id="signupPassword" required
-                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
-                </div>
-                <button type="submit"
-                    class="w-full bg-gradient-to-r from-purple-600 to-purple-800 text-white py-3 rounded-lg font-semibold hover:opacity-90 transition">
-                    Create Account
-                </button>
-            </form>
+                    <div>
+                        <label for="signupPassword" class="block text-gray-700 mb-1">Password</label>
+                        <input type="password" id="signupPassword" required
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 bg-white bg-opacity-90" />
+                    </div>
+                    <button type="submit"
+                        class="w-full mt-4 py-3 rounded-lg text-white bg-gradient-to-r from-purple-600 to-purple-800 hover:opacity-90 transition">
+                        Create Account
+                    </button>
+                </form>
+            </div>
         </div>
     </div>
-
-    <script>
-        // Modal toggle functions
-        const toggleVerificationModal = (show) => {
-            const modal = document.getElementById("verificationModal");
-            const overlay = document.getElementById("verificationOverlay");
-
-            if (show) {
-                modal.classList.remove("hidden");
-                modal.classList.add("flex");
-                overlay.classList.remove("hidden");
-                overlay.classList.add("block");
-                document.body.style.overflow = "hidden";
-            } else {
-                modal.classList.remove("flex");
-                modal.classList.add("hidden");
-                overlay.classList.remove("block");
-                overlay.classList.add("hidden");
-                document.body.style.overflow = "auto";
-            }
-        };
-
-        const toggleModal = (modalId, show) => {
-            const modal = document.getElementById(modalId);
-            const overlay = document.getElementById("loginOverlay");
-
-            if (show) {
-                modal.classList.remove("hidden");
-                modal.classList.add("flex");
-                overlay.classList.remove("hidden");
-                overlay.classList.add("block");
-                document.body.style.overflow = "hidden";
-            } else {
-                modal.classList.remove("flex");
-                modal.classList.add("hidden");
-                overlay.classList.remove("block");
-                overlay.classList.add("hidden");
-                document.body.style.overflow = "auto";
-            }
-        };
-
-        // Event listeners for buttons
-        document.getElementById("loginButton").addEventListener("click", () => toggleModal("loginPopup", true));
-        document.getElementById("signupButton").addEventListener("click", () => toggleModal("signupPopup", true));
-
-        // Close modals when clicking overlay
-        document.getElementById("loginOverlay").addEventListener("click", () => {
-            toggleModal("loginPopup", false);
-            toggleModal("signupPopup", false);
-        });
-
-        // Close modals with Escape key
-        document.addEventListener("keydown", (e) => {
-            if (e.key === "Escape") {
-                toggleModal("loginPopup", false);
-                toggleModal("signupPopup", false);
-                toggleVerificationModal(false);
-            }
-        });
-
-        // Get Started button event
-        document.querySelector('form button[type="submit"]').addEventListener("click", (e) => {
-            e.preventDefault();
-            toggleVerificationModal(true);
-        });
-
-        // Verification form submission
-        document.getElementById("verificationForm").addEventListener("submit", (e) => {
-            e.preventDefault();
-            const errorElement = document.getElementById("verificationError");
-
-            // Here you would implement actual verification logic
-            // This is just a placeholder for the validation
-            const isValid = Math.random() > 0.3; // Simulate 70% success rate
-
-            if (isValid) {
-                errorElement.classList.add("hidden");
-                alert("Verification successful! Account created.");
-                toggleVerificationModal(false);
-                // Here you would proceed with account creation
-            } else {
-                errorElement.classList.remove("hidden");
-            }
-        });
-
-        // Close verification modal when clicking overlay
-        document.getElementById("verificationOverlay").addEventListener("click", () => {
-            toggleVerificationModal(false);
-        });
-    </script>
 
     <!-- Verification Modal -->
     <div id="verificationOverlay" class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-50 hidden"></div>
     <div id="verificationModal" class="fixed inset-0 flex items-center justify-center z-50 hidden">
-        <div class="bg-white rounded-xl shadow-2xl p-6 w-full max-w-md mx-4 max-h-[90vh] overflow-auto">
-            <div class="text-center mb-6">
-                <h2 class="text-2xl font-bold text-purple-700">Service Provider Verification</h2>
-                <p class="text-gray-500 mt-2">Complete your profile to get started</p>
+        <div class="relative bg-white rounded-xl shadow-2xl p-6 w-full max-w-md mx-4 max-h-[90vh] overflow-auto">
+            <div class="absolute inset-0 z-0 pointer-events-none">
+                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1470&amp;q=80"
+                    alt="Background" class="w-full h-full object-cover opacity-20" />
             </div>
-
-            <form id="verificationForm" class="space-y-5" onsubmit="return false;">
-                <!-- Photo of Service Provider -->
-                <div class="flex flex-col items-center">
-                    <div class="relative group">
-                        <div id="profilePhotoContainer"
-                            class="w-24 h-24 rounded-full bg-gray-100 border-2 border-dashed border-gray-300 flex items-center justify-center cursor-pointer overflow-hidden">
-                            <i id="profilePhotoIcon" class="fas fa-user text-gray-400 text-3xl"></i>
-                            <img id="profilePhotoPreview" class="hidden w-full h-full object-cover" src=""
-                                alt="Profile Preview" />
+            <div class="relative z-10">
+                <div class="text-center mb-6">
+                    <h2 class="text-2xl font-bold text-purple-700">Service Provider Verification</h2>
+                    <p class="text-gray-500 mt-2">Complete your profile to get started</p>
+                </div>
+                <form id="verificationForm" class="space-y-5" onsubmit="return false;">
+                    <div class="flex flex-col items-center">
+                        <div class="relative group">
+                            <div id="profilePhotoContainer"
+                                class="w-24 h-24 rounded-full bg-gray-100 border-2 border-dashed border-gray-300 flex items-center justify-center cursor-pointer overflow-hidden">
+                                <i id="profilePhotoIcon" class="fas fa-user text-gray-400 text-3xl"></i>
+                                <img id="profilePhotoPreview" class="hidden w-full h-full object-cover" src=""
+                                    alt="Profile Preview" />
+                            </div>
                         </div>
-                    </div>
-                    <p class="text-gray-600 text-sm mt-2">Photo of Service Provider</p>
-                    <div class="flex gap-4 mt-1">
-                        <button type="button" onclick="openCamera('profile')"
-                            class="text-xs text-purple-600 hover:underline">Take Photo</button>
-                        <button type="button" onclick="triggerUploadPhoto('profilePhotoInput')"
-                            class="text-xs text-purple-600 hover:underline">Upload Photo</button>
-                    </div>
-                    <input type="file" id="profilePhotoInput" accept="image/*" class="hidden" />
-                </div>
-
-                <!-- Name -->
-                <div>
-                    <label for="providerName" class="block text-gray-700 mb-2">Full Name</label>
-                    <input type="text" id="providerName" required
-                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" />
-                </div>
-
-                <!-- Phone Number -->
-                <div>
-                    <label for="providerPhone" class="block text-gray-700 mb-2">Phone Number</label>
-                    <input type="tel" id="providerPhone" required
-                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" />
-                </div>
-
-                <!-- Verification ID Type -->
-                <div>
-                    <label for="verificationType" class="block text-gray-700 mb-2">Verification ID Type</label>
-                    <select id="verificationType" required
-                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
-                        <option value="" disabled selected>Select ID Type</option>
-                        <option value="aadhar">Aadhar Card</option>
-                        <option value="pan">PAN Card</option>
-                        <option value="passport">Passport</option>
-                    </select>
-                </div>
-
-                <!-- Photo of Verification ID -->
-                <div>
-                    <label class="block text-gray-700 mb-2">Photo of Verification ID</label>
-                    <div class="relative group">
-                        <div id="idPhotoContainer"
-                            class="w-full h-32 bg-gray-100 border-2 border-dashed border-gray-300 rounded-lg flex flex-col items-center justify-center cursor-pointer overflow-hidden">
-                            <i id="idPhotoIcon" class="fas fa-id-card text-gray-400 text-3xl mb-2"></i>
-                            <span class="text-gray-500 text-sm">Click to upload ID photo</span>
-                            <img id="idPhotoPreview" class="hidden w-full h-full object-contain" src=""
-                                alt="ID Preview" />
+                        <p class="text-gray-600 text-sm mt-2">Photo of Service Provider</p>
+                        <div class="flex gap-4 mt-1">
+                            <button type="button" onclick="openCamera('profile')"
+                                class="text-xs text-purple-600 hover:underline">Take Photo</button>
+                            <button type="button" onclick="triggerUploadPhoto('profilePhotoInput')"
+                                class="text-xs text-purple-600 hover:underline">Upload Photo</button>
                         </div>
+                        <input type="file" id="profilePhotoInput" accept="image/*" class="hidden" />
                     </div>
-                    <div class="flex gap-4 mt-1">
-                        <button type="button" onclick="openCamera('id')"
-                            class="text-xs text-purple-600 hover:underline">Take Photo</button>
-                        <button type="button" onclick="triggerUploadPhoto('idPhotoInput')"
-                            class="text-xs text-purple-600 hover:underline">Upload Photo</button>
+                    <div>
+                        <label for="providerName" class="block text-gray-700 mb-2">Full Name</label>
+                        <input type="text" id="providerName" required
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 bg-white bg-opacity-90" />
                     </div>
-                    <input type="file" id="idPhotoInput" accept="image/*" class="hidden" />
-                </div>
-
-                <!-- Error Message -->
-                <div id="verificationError" class="text-red-500 text-sm hidden">
-                    Verification failed. Please ensure the name and photo match your ID details.
-                </div>
-
-                <!-- Submit Button -->
-                <button type="submit"
-                    class="w-full bg-gradient-to-r from-purple-600 to-purple-800 text-white py-3 rounded-lg font-semibold hover:opacity-90 transition mt-4">
-                    Create Account
-                </button>
-            </form>
+                    <div>
+                        <label for="providerPhone" class="block text-gray-700 mb-2">Phone Number</label>
+                        <input type="tel" id="providerPhone" required
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 bg-white bg-opacity-90" />
+                    </div>
+                    <div>
+                        <label for="verificationType" class="block text-gray-700 mb-2">Verification ID Type</label>
+                        <select id="verificationType" required
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 bg-white bg-opacity-90">
+                            <option value="" disabled selected>Select ID Type</option>
+                            <option value="aadhar">Aadhar Card</option>
+                            <option value="pan">PAN Card</option>
+                            <option value="passport">Passport</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 mb-2">Photo of Verification ID</label>
+                        <div class="relative group">
+                            <div id="idPhotoContainer"
+                                class="w-full h-32 bg-gray-100 border-2 border-dashed border-gray-300 rounded-lg flex flex-col items-center justify-center cursor-pointer overflow-hidden">
+                                <i id="idPhotoIcon" class="fas fa-id-card text-gray-400 text-3xl mb-2"></i>
+                                <span class="text-gray-500 text-sm">Click to upload ID photo</span>
+                                <img id="idPhotoPreview" class="hidden w-full h-full object-contain" src=""
+                                    alt="ID Preview" />
+                            </div>
+                        </div>
+                        <div class="flex gap-4 mt-1">
+                            <button type="button" onclick="openCamera('id')"
+                                class="text-xs text-purple-600 hover:underline">Take Photo</button>
+                            <button type="button" onclick="triggerUploadPhoto('idPhotoInput')"
+                                class="text-xs text-purple-600 hover:underline">Upload Photo</button>
+                        </div>
+                        <input type="file" id="idPhotoInput" accept="image/*" class="hidden" />
+                    </div>
+                    <div id="verificationError" class="text-red-500 text-sm hidden">Verification failed. Please ensure
+                        the name and photo match your ID details.</div>
+                    <button type="submit"
+                        class="w-full mt-4 py-3 rounded-lg text-white bg-gradient-to-r from-purple-600 to-purple-800 hover:opacity-90 transition">Create
+                        Account</button>
+                </form>
+            </div>
         </div>
     </div>
 
-    <!-- Camera Capture Modal -->
+    <!-- Camera Modal -->
     <div id="cameraModal" class="fixed inset-0 z-60 flex items-center justify-center bg-black bg-opacity-80 hidden">
         <div class="bg-white rounded-xl shadow-lg p-4 max-w-md w-full flex flex-col items-center">
             <video id="cameraVideo" autoplay playsinline class="w-full rounded-lg"></video>
@@ -506,120 +432,6 @@
             </div>
         </div>
     </div>
-
-    <script>
-        let currentCameraTarget = null; // "profile" or "id"
-        let videoStream = null;
-
-        // Open device camera and show capture modal
-        function openCamera(target) {
-            currentCameraTarget = target; // save current target
-            const cameraModal = document.getElementById("cameraModal");
-            const video = document.getElementById("cameraVideo");
-
-            // Show modal
-            cameraModal.classList.remove("hidden");
-
-            // Request camera access
-            navigator.mediaDevices.getUserMedia({ video: true }).then((stream) => {
-                videoStream = stream;
-                video.srcObject = stream;
-                video.play();
-            }).catch((err) => {
-                alert("Camera access denied or not available.");
-                closeCamera();
-            });
-        }
-
-        // Capture image from video stream
-        function capturePhoto() {
-            const video = document.getElementById("cameraVideo");
-            const canvas = document.createElement("canvas");
-            canvas.width = video.videoWidth;
-            canvas.height = video.videoHeight;
-            const ctx = canvas.getContext("2d");
-            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-            const imageDataURL = canvas.toDataURL("image/png");
-
-            if (currentCameraTarget === "profile") {
-                // Show preview and hide icon
-                const profilePreview = document.getElementById("profilePhotoPreview");
-                profilePreview.src = imageDataURL;
-                profilePreview.classList.remove("hidden");
-                document.getElementById("profilePhotoIcon").classList.add("hidden");
-
-                // Clear file input value (optional)
-                document.getElementById("profilePhotoInput").value = "";
-            } else if (currentCameraTarget === "id") {
-                const idPreview = document.getElementById("idPhotoPreview");
-                idPreview.src = imageDataURL;
-                idPreview.classList.remove("hidden");
-                document.getElementById("idPhotoIcon").classList.add("hidden");
-
-                document.getElementById("idPhotoInput").value = "";
-            }
-            closeCamera();
-        }
-
-        function closeCamera() {
-            const cameraModal = document.getElementById("cameraModal");
-            const video = document.getElementById("cameraVideo");
-
-            // Stop all tracks to close camera
-            if (videoStream) {
-                videoStream.getTracks().forEach(track => track.stop());
-                videoStream = null;
-            }
-
-            video.pause();
-            video.srcObject = null;
-            cameraModal.classList.add("hidden");
-        }
-
-        // Upload photo from file input
-        function triggerUploadPhoto(inputId) {
-            const input = document.getElementById(inputId);
-            input.removeAttribute("capture");
-            input.click();
-        }
-
-        // Profile photo preview file input
-        document.getElementById('profilePhotoInput').addEventListener('change', function (e) {
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function (event) {
-                    const preview = document.getElementById('profilePhotoPreview');
-                    preview.src = event.target.result;
-                    preview.classList.remove('hidden');
-                    document.getElementById('profilePhotoIcon').classList.add('hidden');
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-
-        // ID photo preview file input
-        document.getElementById('idPhotoInput').addEventListener('change', function (e) {
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function (event) {
-                    const preview = document.getElementById('idPhotoPreview');
-                    preview.src = event.target.result;
-                    preview.classList.remove('hidden');
-                    document.getElementById('idPhotoIcon').classList.add('hidden');
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-
-        // Capture button event
-        document.getElementById("captureBtn").addEventListener("click", capturePhoto);
-
-        // Close camera modal
-        document.getElementById("closeCameraBtn").addEventListener("click", closeCamera);
-    </script>
-
 
     <footer class="bg-gradient-to-r from-purple-600 to-purple-800 text-white py-12 px-8">
         <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -656,6 +468,157 @@
             <p>© Copyright 2025 HomeAid Ltd. All rights reserved.</p>
         </div>
     </footer>
+
+    <script>
+        let currentCameraTarget = null; // "profile" or "id"
+        let videoStream = null;
+
+        function openCamera(target) {
+            currentCameraTarget = target;
+            const cameraModal = document.getElementById("cameraModal");
+            const video = document.getElementById("cameraVideo");
+            cameraModal.classList.remove("hidden");
+
+            navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
+                videoStream = stream;
+                video.srcObject = stream;
+                video.play();
+            }).catch(err => {
+                alert("Camera access denied or not available.");
+                closeCamera();
+            });
+        }
+
+        function capturePhoto() {
+            const video = document.getElementById("cameraVideo");
+            const canvas = document.createElement("canvas");
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            const ctx = canvas.getContext("2d");
+            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+            const imageDataURL = canvas.toDataURL("image/png");
+
+            if (currentCameraTarget === "profile") {
+                const profilePreview = document.getElementById("profilePhotoPreview");
+                profilePreview.src = imageDataURL;
+                profilePreview.classList.remove("hidden");
+                document.getElementById("profilePhotoIcon").classList.add("hidden");
+                document.getElementById("profilePhotoInput").value = "";
+            } else if (currentCameraTarget === "id") {
+                const idPreview = document.getElementById("idPhotoPreview");
+                idPreview.src = imageDataURL;
+                idPreview.classList.remove("hidden");
+                document.getElementById("idPhotoIcon").classList.add("hidden");
+                document.getElementById("idPhotoInput").value = "";
+            }
+            closeCamera();
+        }
+
+        function closeCamera() {
+            const cameraModal = document.getElementById("cameraModal");
+            if (videoStream) {
+                videoStream.getTracks().forEach(track => track.stop());
+                videoStream = null;
+            }
+            const video = document.getElementById("cameraVideo");
+            video.pause();
+            video.srcObject = null;
+            cameraModal.classList.add("hidden");
+        }
+
+        function triggerUploadPhoto(inputId) {
+            const input = document.getElementById(inputId);
+            input.removeAttribute("capture");
+            input.click();
+        }
+
+        document.getElementById('profilePhotoInput').addEventListener('change', e => {
+            const file = e.target.files;
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = event => {
+                    const preview = document.getElementById('profilePhotoPreview');
+                    preview.src = event.target.result;
+                    preview.classList.remove('hidden');
+                    document.getElementById('profilePhotoIcon').classList.add('hidden');
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        document.getElementById('idPhotoInput').addEventListener('change', e => {
+            const file = e.target.files;
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = event => {
+                    const preview = document.getElementById('idPhotoPreview');
+                    preview.src = event.target.result;
+                    preview.classList.remove('hidden');
+                    document.getElementById('idPhotoIcon').classList.add('hidden');
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        document.getElementById("captureBtn").addEventListener("click", capturePhoto);
+        document.getElementById("closeCameraBtn").addEventListener("click", closeCamera);
+
+        // Event listeners for showing modals
+        document.getElementById("loginButton").addEventListener("click", () => toggleModal("loginPopup", true));
+        document.getElementById("signupButton").addEventListener("click", () => toggleModal("signupPopup", true));
+
+        document.getElementById("loginOverlay").addEventListener("click", () => {
+            toggleModal("loginPopup", false);
+            toggleModal("signupPopup", false);
+        });
+
+        document.getElementById("verificationOverlay").addEventListener("click", () => {
+            toggleVerificationModal(false);
+        });
+
+        // Toggle modal function definitions
+        function toggleModal(modalId, show) {
+            const modal = document.getElementById(modalId);
+            const overlay = document.getElementById("loginOverlay");
+            if (show) {
+                modal.classList.remove("hidden");
+                modal.classList.add("flex");
+                overlay.classList.remove("hidden");
+                overlay.classList.add("block");
+                document.body.style.overflow = "hidden";
+            } else {
+                modal.classList.remove("flex");
+                modal.classList.add("hidden");
+                overlay.classList.remove("block");
+                overlay.classList.add("hidden");
+                document.body.style.overflow = "auto";
+            }
+        }
+
+        function toggleVerificationModal(show) {
+            const modal = document.getElementById("verificationModal");
+            const overlay = document.getElementById("verificationOverlay");
+            if (show) {
+                modal.classList.remove("hidden");
+                modal.classList.add("flex");
+                overlay.classList.remove("hidden");
+                overlay.classList.add("block");
+                document.body.style.overflow = "hidden";
+            } else {
+                modal.classList.remove("flex");
+                modal.classList.add("hidden");
+                overlay.classList.remove("block");
+                overlay.classList.add("hidden");
+                document.body.style.overflow = "auto";
+            }
+        }
+
+        // Get Started button opens verification modal
+        document.getElementById("getStartedBtn").addEventListener("click", function () {
+            toggleVerificationModal(true);
+        });
+
+    </script>
 </body>
 
 </html>
