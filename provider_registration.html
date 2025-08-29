@@ -532,11 +532,12 @@
             input.click();
         }
 
-        document.getElementById('profilePhotoInput').addEventListener('change', e => {
-            const file = e.target.files;
+        // Profile photo preview handler
+        document.getElementById('profilePhotoInput').addEventListener('change', function (e) {
+            const file = e.target.files[0];
             if (file) {
                 const reader = new FileReader();
-                reader.onload = event => {
+                reader.onload = function (event) {
                     const preview = document.getElementById('profilePhotoPreview');
                     preview.src = event.target.result;
                     preview.classList.remove('hidden');
@@ -546,11 +547,12 @@
             }
         });
 
-        document.getElementById('idPhotoInput').addEventListener('change', e => {
-            const file = e.target.files;
+        // ID photo preview handler
+        document.getElementById('idPhotoInput').addEventListener('change', function (e) {
+            const file = e.target.files[0];
             if (file) {
                 const reader = new FileReader();
-                reader.onload = event => {
+                reader.onload = function (event) {
                     const preview = document.getElementById('idPhotoPreview');
                     preview.src = event.target.result;
                     preview.classList.remove('hidden');
@@ -559,6 +561,7 @@
                 reader.readAsDataURL(file);
             }
         });
+
 
         document.getElementById("captureBtn").addEventListener("click", capturePhoto);
         document.getElementById("closeCameraBtn").addEventListener("click", closeCamera);
