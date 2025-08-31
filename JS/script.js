@@ -1,5 +1,5 @@
-// Category and sub-service data
-const servicesData = {
+ // Category and sub-service data
+ const servicesData = {
     plumbing: [
         { name: "Leak Repairs", image: "https://media.istockphoto.com/id/1136317145/photo/plumber-fixing-sink-pipe-with-adjustable-wrench.jpg?s=1024x1024&w=is&k=20&c=Xa_HIu0pgL9rVKcVsgIyVKzkGFj0N419OnvGjP8SgaE=" },
         { name: "Blocked Drains", image: "https://www.shutterstock.com/shutterstock/photos/2554053133/display_1500/stock-photo-plumber-unclogging-blocked-shower-drain-with-hydro-jetting-at-home-bathroom-sewer-cleaning-service-2554053133.jpg" },
@@ -181,6 +181,16 @@ document.addEventListener('DOMContentLoaded', function () {
             title.textContent = service.name;
 
 
+            // Add click handler to add service to cart
+            card.addEventListener('click', function() {
+                addToCart(service.name, service.image);
+                // Highlight briefly to show it was added
+                card.classList.add('ring-2', 'ring-indigo-500');
+                setTimeout(() => {
+                    card.classList.remove('ring-2', 'ring-indigo-500');
+                }, 500);
+            });
+
             serviceCardsGrid.appendChild(clone);
         });
 
@@ -205,122 +215,139 @@ document.addEventListener('DOMContentLoaded', function () {
 // Cart functionality
 const cartButton = document.getElementById('cartButton');
 const cartPopup = document.getElementById('cartPopup');
+const cartOverlay = document.getElementById('cartOverlay');
 const closeCart = document.getElementById('closeCart');
-const cartItemsContainer = document.getElementById('cartItems');
-const cartTotal = document.getElementById('cartTotal');
-const totalAmount = document.getElementById('totalAmount');
-const checkoutButton = document.getElementById('checkoutButton');
-const emptyCartButtons = document.getElementById('emptyCartButtons');
+const exploreServicesBtn = document.getElementById('exploreServicesBtn');
 const cartCount = document.getElementById('cartCount');
+const cartItemsContainer = document.getElementById('cartItemsContainer');
+const emptyCartState = document.getElementById('emptyCartState');
+const cartActions = document.getElementById('cartActions');
+const searchProvidersBtn = document.getElementById('searchProvidersBtn');
+const cartItemTemplate = document.getElementById('cartItemTemplate');
 
-// Sample cart data
-let cart = [];
+let cartItems = [];
 
-function updateCartDisplay() {
-    if (cart.length === 0) {
-        cartItemsContainer.innerHTML = '<p class="text-gray-500 text-center py-8">Your cart is empty</p>';
-        cartTotal.classList.add('hidden');
-        checkoutButton.classList.add('hidden');
-        emptyCartButtons.classList.remove('hidden');
-        cartCount.classList.add('hidden');
+cartButton.addEventListener('click', function () {
+    cartPopup.classList.remove('hidden');
+    cartOverlay.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+});
+
+function closeCartPopup() {
+    cartPopup.classList.add('hidden');
+    cartOverlay.classList.add('hidden');
+    document.body.style.overflow = '';
+}
+
+closeCart.addEventListener('click', closeCartPopup);
+cartOverlay.addEventListener('click', closeCartPopup);
+
+exploreServicesBtn.addEventListener('click', function () {
+    closeCartPopup();
+    document.getElementById('services-section').scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+    });
+});
+
+// Add service to cart
+function addToCart(serviceName, serviceImage) {
+    // Check if already in cart
+    if (cartItems.some(item => item.name === serviceName)) {
+        return;
+    }
+
+    cartItems.push({
+        name: serviceName,
+        image: serviceImage
+    });
+
+    updateCartUI();
+}
+
+// Remove service from cart
+function removeFromCart(serviceName) {
+    cartItems = cartItems.filter(item => item.name !== serviceName);
+    updateCartUI();
+}
+
+// Update cart UI
+function updateCartUI() {
+    // Update cart count
+    cartCount.textContent = cartItems.length;
+    if (cartItems.length > 0) {
+        cartCount.classList.remove('hidden');
     } else {
-        cartItemsContainer.innerHTML = '';
-        let total = 0;
+        cartCount.classList.add('hidden');
+    }
 
-        cart.forEach(item => {
-            const itemElement = document.createElement('div');
-            itemElement.className = 'flex justify-between items-center py-2 border-b';
-            itemElement.innerHTML = `
-         <div>
-             <h4 class="font-medium">${item.name}</h4>
-             <p class="text-sm text-gray-500">${item.description}</p>
-         </div>
-         <div class="text-right">
-             <p class="font-medium">${item.price}</p>
-         </div>
-     `;
-            cartItemsContainer.appendChild(itemElement);
-            total += item.price;
+    // Update cart items list
+    cartItemsContainer.innerHTML = '';
+
+    if (cartItems.length === 0) {
+        cartItemsContainer.appendChild(emptyCartState);
+        cartActions.classList.add('hidden');
+    } else {
+        cartItems.forEach(item => {
+            const clone = cartItemTemplate.content.cloneNode(true);
+            const cartItem = clone.querySelector('.cart-item');
+            const img = clone.querySelector('img');
+            const span = clone.querySelector('span');
+            const removeBtn = clone.querySelector('.remove-item');
+
+            cartItem.dataset.serviceName = item.name.toLowerCase().replace(/[-\s]/g, '');
+            img.src = item.image;
+            img.alt = item.name;
+            span.textContent = item.name;
+
+            removeBtn.addEventListener('click', () => {
+                removeFromCart(item.name);
+            });
+
+            cartItemsContainer.appendChild(clone);
         });
 
-        totalAmount.textContent = total.toFixed(2);
-        cartTotal.classList.remove('hidden');
-        checkoutButton.classList.remove('hidden');
-        emptyCartButtons.classList.add('hidden');
-        cartCount.textContent = cart.length;
-        cartCount.classList.remove('hidden');
+        cartActions.classList.remove('hidden');
     }
 }
 
-cartButton.addEventListener('click', function (e) {
-    e.stopPropagation(); // Prevent immediate closing
-    cartPopup.classList.toggle('hidden');
-    locationPopup.classList.add('hidden');
-    loginPopup.classList.add('hidden');
-    updateCartDisplay();
+// Search providers button click handler
+searchProvidersBtn.addEventListener('click', function() {
+    closeCartPopup();
+    // In a real app, this would redirect to a providers search page
+    alert('Searching providers for: ' + cartItems.map(item => item.name).join(', '));
 });
 
-closeCart.addEventListener('click', function () {
-    cartPopup.classList.add('hidden');
-});
-
-document.addEventListener('click', function (event) {
-    if (!cartPopup.contains(event.target) && event.target !== cartButton) {
-        cartPopup.classList.add('hidden');
-    }
-});
-
-cartPopup.addEventListener('click', function (e) {
-    e.stopPropagation();
-});
-
-function addToCart(service) {
-    cart.push(service);
-    updateCartDisplay();
-}
-
-checkoutButton.addEventListener('click', function () {
-    alert(`Booking confirmed for ${cart.length} services! Total: ${totalAmount.textContent}`);
-    cart = [];
-    updateCartDisplay();
-    cartPopup.classList.add('hidden');
-});
-
-updateCartDisplay();
-
-// Location functionality
+// Location popup logic
 const locationButton = document.getElementById('locationButton');
 const locationPopup = document.getElementById('locationPopup');
+const locationOverlay = document.getElementById('locationOverlay');
 const closeLocation = document.getElementById('closeLocation');
 const useCurrentLocation = document.getElementById('useCurrentLocation');
 
-locationButton.addEventListener('click', function (e) {
-    e.stopPropagation();
-    locationPopup.classList.toggle('hidden');
-    cartPopup.classList.add('hidden');
-    loginPopup.classList.add('hidden');
+// Show popup
+locationButton.addEventListener('click', function () {
+    locationPopup.classList.remove('hidden');
+    locationOverlay.classList.remove('hidden');
+    document.body.style.overflow = 'hidden'; // Prevent scrolling of background
 });
 
-closeLocation.addEventListener('click', function () {
+// Hide popup (via X or overlay)
+function closeLocModal() {
     locationPopup.classList.add('hidden');
-});
+    locationOverlay.classList.add('hidden');
+    document.body.style.overflow = '';
+}
+closeLocation.addEventListener('click', closeLocModal);
+locationOverlay.addEventListener('click', closeLocModal);
 
-document.addEventListener('click', function (event) {
-    if (!locationPopup.contains(event.target) && event.target !== locationButton) {
-        locationPopup.classList.add('hidden');
-    }
-});
-
-locationPopup.addEventListener('click', function (e) {
-    e.stopPropagation();
-});
-
+// Use current location example (you can adjust this logic as needed)
 useCurrentLocation.addEventListener('click', function () {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
             function (position) {
                 alert(`Location set to: Latitude ${position.coords.latitude}, Longitude ${position.coords.longitude}`);
-                locationPopup.classList.add('hidden');
+                closeLocModal();
             },
             function (error) {
                 alert("Couldn't get your location automatically. Please search for your location instead.");
@@ -331,63 +358,108 @@ useCurrentLocation.addEventListener('click', function () {
     }
 });
 
-// Login/Signup functionality
-const loginButton = document.getElementById('loginButton');
-const loginPopup = document.getElementById('loginPopup');
-const closeLogin = document.getElementById('closeLogin');
-const loginChoice = document.getElementById('loginChoice');
-const loginForm = document.getElementById('loginForm');
-const signupForm = document.getElementById('signupForm');
-const showLoginForm = document.getElementById('showLoginForm');
-const showSignupForm = document.getElementById('showSignupForm');
-const backToChoiceFromLogin = document.getElementById('backToChoiceFromLogin');
-const backToChoiceFromSignup = document.getElementById('backToChoiceFromSignup');
 
-// Helper to reset popup to choices
-function resetLoginPopup() {
-    loginChoice.classList.remove('hidden');
-    loginForm.classList.add('hidden');
-    signupForm.classList.add('hidden');
-}
-
-loginButton.addEventListener('click', function () {
-    loginPopup.classList.toggle('hidden');
-    resetLoginPopup();
-    cartPopup.classList.add('hidden');
-    locationPopup.classList.add('hidden');
-});
-
-closeLogin.addEventListener('click', function () {
-    loginPopup.classList.add('hidden');
-    resetLoginPopup();
-});
-
-document.addEventListener('click', function (event) {
-    if (!loginPopup.contains(event.target) && event.target !== loginButton) {
-        loginPopup.classList.add('hidden');
-        resetLoginPopup();
-    }
-});
-
-loginPopup.addEventListener('click', function (e) {
+// Prevent click propagation inside popup
+locationPopup.addEventListener('click', function (e) {
     e.stopPropagation();
 });
 
-// Button events for switching forms
-showLoginForm.addEventListener('click', function () {
-    loginChoice.classList.add('hidden');
-    loginForm.classList.remove('hidden');
-    signupForm.classList.add('hidden');
-});
+// Login/Signup functionality
+const loginButton = document.getElementById('loginButton');
+const loginFormPopup = document.getElementById('loginFormPopup');
+const showLoginForm = document.getElementById('showLoginForm');
+// const loginPopup = document.getElementById('loginPopup');
+// const loginOverlay = document.getElementById('loginOverlay');
+// const showSignupForm = document.getElementById('showSignupForm');
+
+const showSignupForm = document.getElementById('showSignupForm');
+const signupFormPopup = document.getElementById('signupFormPopup');
+const loginPopup = document.getElementById('loginPopup');
+const loginOverlay = document.getElementById('loginOverlay');
 
 showSignupForm.addEventListener('click', function () {
-    loginChoice.classList.add('hidden');
-    signupForm.classList.remove('hidden');
-    loginForm.classList.add('hidden');
+    // Hide initial login/sign up choice popup
+    loginPopup.classList.add('hidden');
+    loginPopup.classList.remove('flex');
+
+    // Show sign up popup and display as flex for centering
+    signupFormPopup.classList.remove('hidden');
+    signupFormPopup.classList.add('flex');
+
+    // Show overlay and ensure it displays block
+    loginOverlay.classList.remove('hidden');
+    loginOverlay.classList.add('block');
+
+    // Prevent background scroll
+    document.body.style.overflow = 'hidden';
 });
 
-backToChoiceFromLogin.addEventListener('click', resetLoginPopup);
-backToChoiceFromSignup.addEventListener('click', resetLoginPopup);
+
+
+function toggleLoginPopup() {
+    loginPopup.classList.toggle('hidden');
+    loginOverlay.classList.toggle('hidden');
+    document.body.style.overflow = loginPopup.classList.contains('hidden') ? '' : 'hidden';
+}
+
+function showLoginFormPopup() {
+    loginPopup.classList.add('hidden');
+    loginFormPopup.classList.remove('hidden');
+}
+
+function hideLoginFormPopup() {
+    loginFormPopup.classList.add('hidden');
+    loginOverlay.classList.add('hidden');
+    document.body.style.overflow = '';
+}
+
+loginButton.addEventListener('click', function () {
+    toggleLoginPopup();
+    cartPopup.classList.add('hidden');
+    cartOverlay.classList.add('hidden');
+    locationPopup.classList.add('hidden');
+    locationOverlay.classList.add('hidden');
+});
+
+loginOverlay.addEventListener('click', function () {
+    if (!loginFormPopup.classList.contains('hidden')) {
+        hideLoginFormPopup();
+    } else {
+        toggleLoginPopup();
+    }
+});
+
+showLoginForm.addEventListener('click', showLoginFormPopup);
+showSignupForm.addEventListener('click', function () {
+    loginPopup.classList.add('hidden');
+    signupFormPopup.classList.remove('hidden');
+});
+
+// Click outside popups closes them cleanly
+loginOverlay.addEventListener('click', function () {
+    if (!signupFormPopup.classList.contains('hidden')) {
+        // Hide sign up popup
+        signupFormPopup.classList.add('hidden');
+        signupFormPopup.classList.remove('flex');
+
+        // Hide overlay
+        loginOverlay.classList.add('hidden');
+        loginOverlay.classList.remove('block');
+
+        // Enable background scroll
+        document.body.style.overflow = '';
+    } else if (!loginPopup.classList.contains('hidden')) {
+        // Hide login popup
+        loginPopup.classList.add('hidden');
+        loginPopup.classList.remove('flex');
+
+        // Hide overlay
+        loginOverlay.classList.add('hidden');
+        loginOverlay.classList.remove('block');
+
+        document.body.style.overflow = '';
+    }
+});
 
 // Simple script to toggle mobile menu (would be expanded in a real implementation)
 const mobileMenuButton = document.querySelector('button[class*="md:hidden"]');
